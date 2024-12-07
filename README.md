@@ -1,5 +1,3 @@
-github
-github project
-github action
-postres
-mobile
+## Centralized Platform
+
+A platform by students, for students.
