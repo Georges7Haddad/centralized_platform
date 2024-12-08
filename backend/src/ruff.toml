@@ -26,6 +26,6 @@ extend-select = [
 ]
 
 [format]
-quote-style = "single"
+quote-style = "double"
 indent-style = "tab"
 docstring-code-format = true
