@@ -1,0 +1,43 @@
+name: Frontend
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-build-and-test:
+    # CI Machine OS
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout commit
+      - uses: actions/checkout@v4
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      # Run linter
+      - name: Run linter
+        run: |
+          cd frontend
+          npm run lint
+
+      # Run tests
+      - name: Run tests
+        run: |
+          cd frontend
+          npm test
+
+      # Build the app
+      - name: Build the React app
+        run: |
+          cd frontend
+          npm run build
