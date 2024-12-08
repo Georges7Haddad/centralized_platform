@@ -32,10 +32,8 @@ jobs:
 
       # Run linter
       - name: Lint with ruff
-        run: |
-          ruff check
+        run: ruff check
 
       # Run tests
       - name: Test with pytest
-        run: |
-          pytest
+        run: pytest

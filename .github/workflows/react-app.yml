@@ -18,22 +18,26 @@ jobs:
       # Checkout commit
       - uses: actions/checkout@v4
 
-      # Go to frontend directory
-      - name: Checkout frontend directory
-        run: cd frontend
-
       # Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd frontend
+          npm install
 
       # Run linter
       - name: Run linter
-        run: npm run lint
+        run: |
+          cd frontend
+          npm run lint
 
       # Run tests
       - name: Run tests
-        run: npm test
+        run: |
+          cd frontend
+          npm test
 
       # Build the app
       - name: Build the React app
-        run: npm run build
+        run: |
+          cd frontend
+          npm run build
