@@ -1,6 +1,15 @@
-export default async function Page() {
-  let req = await fetch("http://127.0.0.1:8000/");
-  let resp = await req.text();
+"use client";
 
-  return <div>{resp}</div>;
+import { useEffect, useState } from "react";
+
+export default function Page() {
+  const [data, setData] = useState("");
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/").then((response) =>
+      setData(response.text())
+    );
+  }, []); // Runs only once when the component loads
+
+  return <div data-testid="response">{data}</div>;
 }
