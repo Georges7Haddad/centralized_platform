@@ -26,6 +26,7 @@ backend/*.sqlite3
 # Node.js (React frontend)
 frontend/node_modules/
 frontend/.next/
+frontend/coverage/
 frontend/.cache/
 frontend/dist/
 frontend/build/
@@ -33,6 +34,7 @@ frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
 frontend/pnpm-debug.log*
+package-lock.json
 
 # next.js
 /.next/
