@@ -17,7 +17,7 @@ export default function Page({ params }) {
     }
   `;
 
-  const { data, loading, error } = useQuery(GET_USER, {
+  const { _data, loading, _error } = useQuery(GET_USER, {
     variables: { id },
     onCompleted: (data) => {
       setUser(data.getUser);
