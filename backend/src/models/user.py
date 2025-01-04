@@ -8,7 +8,3 @@ class User:
 	last_name: str
 	username: str
 	password: str
-
-
-
-
