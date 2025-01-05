@@ -2,11 +2,9 @@ from typing import Union
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from strawberry.fastapi import GraphQLRouter
 
-from src.graphql.answer import answer_schema
-from src.graphql.course import course_schema
-from src.graphql.question import question_schema
-from src.graphql.user import user_schema
+from src.graphql.schema import schema
 
 app = FastAPI()
 
@@ -22,10 +20,8 @@ app.add_middleware(
 	allow_headers=["*"],  # Allow all headers
 )
 
-app.include_router(user_schema)
-app.include_router(answer_schema)
-app.include_router(question_schema)
-app.include_router(course_schema)
+graphql_app = GraphQLRouter(schema, path="/graphql")
+app.include_router(graphql_app)
 
 
 @app.get("/")

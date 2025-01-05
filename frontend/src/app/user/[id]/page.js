@@ -12,7 +12,7 @@ export default function Page({ params }) {
     query UserQuery($id: String!) {
       getUser(id: $id) {
         firstName
-        age
+        lastName
       }
     }
   `;
@@ -27,7 +27,7 @@ export default function Page({ params }) {
   if (!user || loading) return <div>Loading...</div>;
   return (
     <div>
-      Hello User with id {id}, name {user.firstName}, age {user.age}
+      Hello User with id {id}, name {user.firstName}, lastname {user.lastName}
     </div>
   );
 }
