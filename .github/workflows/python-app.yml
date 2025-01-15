@@ -41,11 +41,11 @@ jobs:
       # Start server
       - name: Start server
         run: |
-          nohup python backend/app.py &
+          nohup uvicorn backend.app:app --host 0.0.0.0 --port 8000 &
 
       # Wait for server to start
       - name: Wait for server to start
-        run: sleep 5
+        run: sleep 10
 
       # Perform Health Check
       - name: Perform Health Check
