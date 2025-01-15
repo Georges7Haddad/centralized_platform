@@ -37,3 +37,13 @@ jobs:
       # Run tests
       - name: Test with pytest
         run: pytest
+
+      # Start server
+      - name: Start server
+        run: |
+          nohup python backend/app.py &
+
+      # Perform Health Check
+      - name: Perform Health Check
+        run: |
+          curl --fail http://localhost:8000/health || exit 1
