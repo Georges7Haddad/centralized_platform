@@ -35,7 +35,5 @@ def get_example(example_id: int, q: Union[str, None] = None):
 def health_check():
     return {"status": "healthy"}
 
-@app.get("/dummy")
-def dummy_data():
-    return {"data": "This is some dummy data"}
+
 
