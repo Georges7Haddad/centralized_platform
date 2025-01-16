@@ -41,7 +41,7 @@ jobs:
       # Start server
       - name: Start server
         run: |
-          fastapi dev src/server.py
+          fastapi dev backend/src/server.py
 
       # Perform Health Check
       - name: Perform Health Check
