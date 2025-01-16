@@ -1,5 +1,6 @@
 import strawberry
 
+
 @strawberry.type
 class Question:
 	id: int
