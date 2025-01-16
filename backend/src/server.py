@@ -30,3 +30,12 @@ def root_api():
 @app.get("/example/{example_id}")
 def get_example(example_id: int, q: Union[str, None] = None):
 	return {"example_id": example_id}
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
+
+@app.get("/dummy")
+def dummy_data():
+    return {"data": "This is some dummy data"}
+
