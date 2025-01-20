@@ -1,18 +1,15 @@
-import pytest
+from fastapi.testclient import TestClient
 from sqlalchemy import text
-from sqlmodel import Session
 
-from src.database.database import engine
+from src.database.database import get_session
+from src.server import app
+
+client = TestClient(app)
 
 
 def test_database_connection():
-	try:
-		with Session(engine) as session:
-			result = session.exec(text("SELECT 1"))
-			assert result.fetchone() is not None
-	except Exception as e:
-		pytest.fail(f"Database connection failed: {e}")
-
-
-if __name__ == "__main__":
-	test_database_connection()
+	with next(get_session()) as session:
+		result = session.exec(text("SELECT 1")).one()
+		assert (
+			result[0] == 1
+		), "Database connection test failed: Expected result to be 1"
