@@ -2,9 +2,9 @@ name: Backend
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -41,7 +41,7 @@ jobs:
       # Start server
       - name: Start server
         run: |
-          fastapi dev backend/src/server.py
+          uvicorn src.server:app --host 127.0.0.1 --port 8000 --loop asyncio
 
       # Perform Health Check
       - name: Perform Health Check
