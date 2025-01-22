@@ -3,7 +3,6 @@
 set -e
 #Frontend
 cd frontend
-npm install
 
 # Run frontend linter
 echo "Running frontend linter..."
@@ -17,8 +16,7 @@ cd ..
 
 #Backend
 cd backend
-python -m pip install --upgrade pip
-pip install -r dependencies.txt
+#Run backend linter
 echo "Running backend linter..."
 ruff check .
 
