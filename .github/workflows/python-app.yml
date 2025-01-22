@@ -42,9 +42,9 @@ jobs:
       - name: Start server
         working-directory: backend
         run: |
-          uvicorn src.server:app --host 127.0.0.1 --port 8000 --loop asyncio &
+          fastapi dev src/server.py &
 
       # Perform Health Check
       - name: Perform Health Check
         run: |
-          curl --fail http://localhost:8000/health || exit 1
+          curl --fail http://localhost:8000/health
