@@ -2,9 +2,9 @@ name: Backend
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -37,3 +37,14 @@ jobs:
       # Run tests
       - name: Test with pytest
         run: pytest
+
+      # Start server
+      - name: Start server
+        working-directory: backend
+        run: |
+          fastapi dev src/server.py &
+
+      # Perform Health Check
+      - name: Perform Health Check
+        run: |
+          curl --fail http://localhost:8000/health
