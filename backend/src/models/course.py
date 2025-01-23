@@ -1,5 +1,5 @@
 import strawberry
-from typing import List
+from user import Student
 
 @strawberry.type
 class Course:
@@ -11,4 +11,4 @@ class Course:
     department: str
     number: int
     location: str
-    students: List["Student"]  
+    students: list["Student"]  

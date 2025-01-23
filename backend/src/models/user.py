@@ -1,5 +1,4 @@
 import strawberry
-from typing import List
 
 @strawberry.type
 class User:
@@ -14,9 +13,9 @@ class User:
 @strawberry.type
 class Professor(User):
     office_hours: str
-    courses: List["Course"]  
+    courses: list["Course"]  
 
 # Student Class
 @strawberry.type
 class Student(User):
-    courses: List["Course"] 
+    courses: list["Course"] 
