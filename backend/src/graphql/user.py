@@ -1,5 +1,6 @@
 import strawberry
 from strawberry.fastapi import GraphQLRouter
+
 from src.models.user import User
 
 fake_db = {

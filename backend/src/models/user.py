@@ -1,7 +1,8 @@
 import strawberry
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
-    from course import Course
+    from src.models.course import Course
 
 @strawberry.type
 class User:
