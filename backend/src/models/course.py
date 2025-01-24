@@ -1,5 +1,8 @@
 import strawberry
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from user import Student
 
 @strawberry.type
 class Course:
@@ -12,5 +15,3 @@ class Course:
     number: int
     location: str
     students: list["Student"]
-
-from user import Student
