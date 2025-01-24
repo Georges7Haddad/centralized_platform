@@ -1,5 +1,6 @@
-import strawberry
 from typing import TYPE_CHECKING
+
+import strawberry
 
 if TYPE_CHECKING:
     from src.models.course import Course
