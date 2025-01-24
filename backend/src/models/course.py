@@ -1,5 +1,5 @@
 import strawberry
-from user import Student
+
 
 @strawberry.type
 class Course:
@@ -11,4 +11,6 @@ class Course:
     department: str
     number: int
     location: str
-    students: list["Student"]  
+    students: list["Student"]
+
+from user import Student

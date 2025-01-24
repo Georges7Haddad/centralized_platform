@@ -1,5 +1,6 @@
 import strawberry
 
+
 @strawberry.type
 class User:
     id: str
@@ -8,6 +9,8 @@ class User:
     faculty: str
     major: str
     email: str
+
+
 
 # Professor Class
 @strawberry.type
@@ -18,4 +21,7 @@ class Professor(User):
 # Student Class
 @strawberry.type
 class Student(User):
+    
     courses: list["Course"] 
+
+from course import Course
