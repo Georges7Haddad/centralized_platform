@@ -1,7 +1,24 @@
+from typing import TYPE_CHECKING
+
 import strawberry
 
+if TYPE_CHECKING:
+    from src.models.course import Course
 
 @strawberry.type
 class User:
-	first_name: str
-	age: int
+    id: str
+    first_name: str
+    last_name: str
+    faculty: str
+    major: str
+    email: str
+
+@strawberry.type
+class Professor(User):
+    office_hours: str
+    courses: list["Course"]  
+
+@strawberry.type
+class Student(User):
+    courses: list["Course"] 
