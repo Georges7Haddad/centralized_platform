@@ -35,3 +35,8 @@ fastapi dev src/server.py
 - Base URL: http://127.0.0.1:8000
 - Interactive API Docs (Swagger UI): http://127.0.0.1:8000/docs
 - ReDoc Documentation: http://127.0.0.1:8000/redoc
+
+6. Setting up the Database environment
+
+- Download the file named "database_config.env" from the shared group folder on Google Drive.
+- Place the file in the `backend/Database` folder
