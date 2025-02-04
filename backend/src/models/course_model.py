@@ -1,7 +1,7 @@
 from sqlmodel import Field, SQLModel
 
 
-# Base user model to inherit from
+# Base Course model to inherit from
 class CourseBase(SQLModel):
 	crn: int
 	name: str = Field(index=True)
@@ -12,17 +12,17 @@ class CourseBase(SQLModel):
 	end_date: str
 
 
-# User create model (for data creation)
+# Course create model (for data creation)
 class CourseCreate(CourseBase):
 	pass
 
 
-# User public model (for data reading)
+# Course public model (for data reading)
 class CoursePublic(CourseBase):
 	pass
 
 
-# User model to update data
+# Course model to update data
 class CourseUpdate(SQLModel):
 	name: str | None = None
 	professor: str | None = None
