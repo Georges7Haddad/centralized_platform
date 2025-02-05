@@ -10,6 +10,7 @@ class CourseBase(SQLModel):
 	capacity: int
 	start_date: str
 	end_date: str
+	type: str
 
 
 # Course create model (for data creation)
@@ -30,3 +31,4 @@ class CourseUpdate(SQLModel):
 	capacity: int | None = None
 	start_date: str | None = None
 	end_date: str | None = None
+	type: str
