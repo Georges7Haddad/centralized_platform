@@ -93,7 +93,6 @@ def parse_courses(html):
 		)
 
 		# Clean up instructor text
-		instructor_str = instructor_str.replace("(P)", "").strip()
 		instructor_str = re.sub(r"\s{2,}", " ", instructor_str)
 
 		course_data = {
