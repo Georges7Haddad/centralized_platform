@@ -14,8 +14,8 @@ export default function CourseInfo() {
 
   return (
     <div className="mt-6">
-      This is {courseName}'s general info ex: full course name how many credits
-      ect...
+      This is {`${courseName}'s`} general info ex: full course name how many
+      credits ect...
     </div>
   );
 }
