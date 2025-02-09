@@ -31,9 +31,7 @@ def root_api():
 def get_example(example_id: int, q: Union[str, None] = None):
 	return {"example_id": example_id}
 
+
 @app.get("/health")
 def health_check():
-    return {"status": "healthy"}
-
-
-
+	return {"status": "healthy"}
