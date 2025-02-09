@@ -6,7 +6,7 @@ import {
   InMemoryCache,
 } from "@apollo/experimental-nextjs-app-support";
 
-const serverUrl = `${process.env.REACT_APP_SERVER_URL}/users`; 
+const serverUrl = `${process.env.REACT_APP_FRONTEND_URL}/users`; 
 
 function makeClient() {
   return new ApolloClient({
