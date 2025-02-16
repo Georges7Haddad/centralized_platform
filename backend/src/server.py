@@ -9,7 +9,7 @@ from src.graphql.user import user_schema
 app = FastAPI()
 
 origins = [
-	"http://localhost:3000",  # React or frontend running locally
+	"http://localhost:8000",  # React or frontend running locally
 ]
 # We need to allow requests from these origins
 app.add_middleware(
