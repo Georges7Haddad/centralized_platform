@@ -6,9 +6,11 @@ import {
   InMemoryCache,
 } from "@apollo/experimental-nextjs-app-support";
 
+const serverUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/users`; 
+
 function makeClient() {
   return new ApolloClient({
-    uri: "http://127.0.0.1:8000/users",
+    uri: serverUrl,
     cache: new InMemoryCache(),
   });
 }
