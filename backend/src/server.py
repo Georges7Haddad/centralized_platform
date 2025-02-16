@@ -5,6 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from src.graphql.user import user_schema
 
+from src.database.database import create_db_and_tables
+
 app = FastAPI()
 
 origins = [
@@ -35,3 +37,7 @@ def get_example(example_id: int, q: Union[str, None] = None):
 @app.get("/health")
 def health_check():
 	return {"status": "healthy"}
+
+@app.on_event("startup")
+def on_startup():
+    create_db_and_tables()
