@@ -3,7 +3,6 @@ from typing import Union
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.database.database import create_db_and_tables
 from src.graphql.user import user_schema
 
 app = FastAPI()
@@ -36,7 +35,3 @@ def get_example(example_id: int, q: Union[str, None] = None):
 @app.get("/health")
 def health_check():
 	return {"status": "healthy"}
-
-@app.on_event("startup")
-def on_startup():
-    create_db_and_tables()
