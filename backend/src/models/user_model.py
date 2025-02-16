@@ -1,10 +1,11 @@
-from sqlmodel import Field, SQLModel
+from sqlmodel import SQLModel
 
 
 # Base user model to inherit from
 class UserBase(SQLModel):
 	id: int
-	name: str = Field(index=True)
+	first_name: str
+	last_name: str
 	faculty: str
 	major: str
 	email: str
@@ -15,14 +16,10 @@ class UserCreate(UserBase):
 	pass
 
 
-# User public model (for data reading)
-class UserPublic(UserBase):
-	pass
-
-
 # User model to update data
 class UserUpdate(SQLModel):
-	name: str | None = None
+	first_name: str | None = None
+	last_name: str | None = None
 	faculty: str | None = None
 	major: str | None = None
 	email: str | None = None
