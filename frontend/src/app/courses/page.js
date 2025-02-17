@@ -1,13 +1,10 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import MuiAccordion from "@/components/accordion";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import Divider from "@mui/material/Divider";
+import { Stack, Box, Typography, TextField, Paper } from "@mui/material";
 
-//Here we will use an api call that fetches all the courses for the current semester
+// Mock API Response
 const mockCourses = [
   {
     courseCode: "ACCT 210",
@@ -65,6 +62,7 @@ const mockCourses = [
 
 export default function CoursesPage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
 
   const filteredCourses = mockCourses.filter(
     (course) =>
@@ -82,29 +80,41 @@ export default function CoursesPage() {
         id="search-courses"
         label="Search Courses"
         variant="standard"
+        fullWidth
         onChange={(e) => setSearchTerm(e.target.value)}
-      ></TextField>
+        sx={{ mb: 2 }}
+      />
 
-      <div className="CoursesFound">
+      <Stack spacing={2}>
         {filteredCourses.map((course) => (
           <MuiAccordion
             key={course.courseCode}
             Title={`${course.courseCode} - ${course.name}`}
             Content={course.sections.map((section) => (
-              <Stack key={section.crn} spacing={1}>
-                <Divider />
-                <Box>{`CRN: ${section.crn}`}</Box>
-                <Box>{`Credits: ${section.credits}`}</Box>
-                <Box>{`Days: ${section.days}`}</Box>
-                <Box>{`Time: ${section.time}`}</Box>
-                <Box>{`Location: ${section.location}`}</Box>
-                <Box>{`Type: ${section.scheduleType}`}</Box>
-                <Box>{`Instructor: ${section.instructor.join(", ")}`}</Box>
-              </Stack>
+              <Paper
+                key={section.crn}
+                sx={{
+                  p: 2,
+                  my: 1,
+                  cursor: "pointer",
+                  "&:hover": { backgroundColor: "#f0f0f0" },
+                }}
+                onClick={() => router.push(`/courses/${section.crn}`)}
+              >
+                <Stack spacing={1}>
+                  <Box>{`CRN: ${section.crn}`}</Box>
+                  <Box>{`Credits: ${section.credits}`}</Box>
+                  <Box>{`Days: ${section.days}`}</Box>
+                  <Box>{`Time: ${section.time}`}</Box>
+                  <Box>{`Location: ${section.location}`}</Box>
+                  <Box>{`Type: ${section.scheduleType}`}</Box>
+                  <Box>{`Instructor: ${section.instructor.join(", ")}`}</Box>
+                </Stack>
+              </Paper>
             ))}
           ></MuiAccordion>
         ))}
-      </div>
+      </Stack>
     </div>
   );
 }
