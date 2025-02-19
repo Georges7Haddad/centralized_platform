@@ -1,6 +1,5 @@
 from fastapi import HTTPException
 from sqlmodel import Session, select
-
 from src.endpoints.start_session import get_session_dependency
 from src.models.course_model import Course
 from src.models.student_model import (
