@@ -1,3 +1,5 @@
+from datetime import time
+
 from sqlmodel import Field, SQLModel
 
 from src.models.user_model import UserBase, UserCreate, UserUpdate
@@ -5,7 +7,9 @@ from src.models.user_model import UserBase, UserCreate, UserUpdate
 
 # Base Instructor model to inherit from
 class InstructorBase(UserBase):
-	office_hours: str
+	office_hours_days: str
+	office_hours_starts_at: time
+	office_hours_ends_at: time
 	position: str
 
 
@@ -16,7 +20,9 @@ class InstructorCreate(InstructorBase, UserCreate):
 
 # Instructor model to update data
 class InstructorUpdate(UserUpdate):
-	office_hours: str | None = None
+	office_hours_days: str | None = None
+	office_hours_starts_at: time | None = None
+	office_hours_ends_at: time | None = None
 	position: str | None = None
 
 
