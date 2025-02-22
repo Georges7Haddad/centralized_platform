@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from sqlmodel import Session, select
-from database.database import get_session_dependency
+from src.database.database import get_session_dependency
 from src.models.course_model import (
 	Course,
 	CourseBase,
