@@ -1,6 +1,7 @@
 import os
 
 from dotenv import load_dotenv
+from fastapi import Depends
 from sqlmodel import Session, SQLModel, create_engine
 
 load_dotenv(
@@ -24,3 +25,5 @@ def create_db_and_tables():
 def get_session():
 	with Session(engine) as session:
 		yield session
+
+get_session_dependency = Depends(get_session)
