@@ -16,6 +16,10 @@ export default function ClubContactInfo() {
             .catch(error => console.error('Error fetching club info:', error));
     }, [club]);
 
+    if (!clubContactInfo) {
+        return <div>Loading...</div>;
+    }
+
     //we can add later more contact links and social media links
     return (
         <div>
