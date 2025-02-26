@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 
 export default function ClubInfo() {
     const [clubInfo, setClubInfo] = useState(null);
