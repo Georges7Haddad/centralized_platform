@@ -10,7 +10,7 @@ export default function ClubContactInfo() {
 
         fetch(`/club-info/${club}`)
             .then(response => response.json())
-            .then(data => setClubInfo(data))
+            .then(data => setClubContactInfo(data))
             .catch(error => console.error('Error fetching club info:', error));
     }, [club]);
 
