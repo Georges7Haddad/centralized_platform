@@ -1,7 +1,7 @@
 import SportTeamInfo from "./sportTeamInfo";
-import SportTeamContactInfo from "./clubContactInfo";
+import SportTeamContactInfo from "./sportTeamContactInfo";
 
-export default function ClubPage() {
+export default function SportTeamPage() {
     return(
         <div>
             <SportTeamInfo />
