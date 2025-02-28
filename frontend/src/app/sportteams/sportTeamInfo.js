@@ -12,7 +12,7 @@ export default function SportTeamInfo() {
 
         fetch(`/sportteam-info/${sportTeam}`)
             .then(response => response.json())
-            .then(data => setClubInfo(data))
+            .then(data => setSportTeamInfo(data))
             .catch(error => console.error('Error fetching sport team info:', error));
     }, [sportTeam]);
 
