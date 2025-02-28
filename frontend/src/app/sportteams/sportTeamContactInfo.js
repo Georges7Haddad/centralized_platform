@@ -14,7 +14,7 @@ export default function SportTeamContactInfo() {
             .then(response => response.json())
             .then(data => setSportTeamContactInfo(data))
             .catch(error => console.error('Error fetching sport team info:', error));
-    }, [sportteam]);
+    }, [sportTeam]);
 
     if (!sportTeamContactInfo) {
         return <div>Loading...</div>;
