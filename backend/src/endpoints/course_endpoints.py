@@ -25,14 +25,6 @@ def create_course(
 		return db_course
 
 
-# read all courses data
-@app.get("/courses/", response_model=list[CourseBase])
-def read_courses(session: Session = get_session_dependency):
-	with session:
-		courses = session.exec(select(Course)).all()
-	return courses
-
-
 # read one course
 @app.get("/courses/{course_crn}", response_model=CourseBase)
 def read_course(course_crn: int, session: Session = get_session_dependency):

@@ -11,7 +11,6 @@ class Day(str, Enum):
 	TUESDAY = "T"
 	THURSDAY = "R"
 	SATURDAY = "S"
-	SUNDAY = "U"
 	MWF = "MWF"
 	TR = "TR"
 	MW = "MW"
