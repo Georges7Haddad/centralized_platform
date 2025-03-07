@@ -1,11 +1,6 @@
 from fastapi import Depends, HTTPException
 from sqlmodel import Session, select
-
-# from src.database.database import get_session
-from src.endpoints.local_connection import get_session
-
-# from src.server import app
-from src.endpoints.local_session import app
+from src.database.database import get_session
 from src.models.course_model import Course
 from src.models.student_model import (
 	Student,
@@ -14,6 +9,7 @@ from src.models.student_model import (
 	StudentCreate,
 	StudentUpdate,
 )
+from src.server import app
 
 get_session_dependency = Depends(get_session)
 
