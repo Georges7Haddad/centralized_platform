@@ -1,5 +1,6 @@
 from fastapi import Depends, HTTPException
 from sqlmodel import Session, select
+
 from src.database.database import get_session
 from src.models.course_model import Course
 from src.models.student_model import (
