@@ -2,6 +2,7 @@ from typing import Union
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from src.database.database import create_db_and_tables
 
 from src.graphql.user import user_schema
 
@@ -20,6 +21,10 @@ app.add_middleware(
 )
 
 app.include_router(user_schema)
+
+@app.on_event("startup")
+def startup_event():
+    create_db_and_tables()
 
 
 @app.get("/")
