@@ -14,6 +14,23 @@ jobs:
     # CI Machine OS
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rootpassword
+          MYSQL_DATABASE: testdb
+          MYSQL_USER: testuser
+          MYSQL_PASSWORD: testpassword
+        ports:
+          - 3306:3306
+        options: >
+          --health-cmd="mysqladmin ping -uroot -prootpassword" 
+          --health-interval=10s 
+          --health-timeout=5s 
+          --health-retries=5
+
+        
     steps:
       # Checkout commit
       - uses: actions/checkout@v4
@@ -36,6 +53,8 @@ jobs:
 
       # Run tests
       - name: Test with pytest
+        env:
+          DATABASE_URL: mysql+pymysql://testuser:testpassword@127.0.0.1:3306/testdb
         run: pytest
 
       # Start server
