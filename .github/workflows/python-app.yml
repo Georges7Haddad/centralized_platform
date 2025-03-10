@@ -58,20 +58,9 @@ jobs:
       - name: Start server
         working-directory: backend
         run: |
-          uvicorn src.server:app --host 0.0.0.0 --port 8000 &
-          sleep 10 
-
-      - name: Check if server is running
-        run: |
-          sudo lsof -i :8000 || echo "Port 8000 not in use"
+          fastapi dev src/server.py &
 
       # Perform Health Check
       - name: Perform Health Check
-        env:
-          DATABASE_HOST: 127.0.0.1
-          DATABASE_USERNAME: testuser
-          DATABASE_PASSWORD: testpassword
-          DATABASE_NAME: testdb
         run: |
-          sleep 5
-          curl -v --fail http://localhost:8000/health
+          curl --fail http://localhost:8000/health
