@@ -23,10 +23,10 @@ jobs:
           DATABASE_USERNAME: testuser
           DATABASE_PASSWORD: testpassword
           DATABASE_NAME: testdb
-          DATABASE_ROOTPASSWORD: rootpassword
+          MYSQL_ROOT_PASSWORD: testpassword
         ports:
           - "3306:3306"
-        options: "--health-cmd=\"mysqladmin ping -uroot -prootpassword || exit 1\" --health-interval=10s --health-timeout=5s --health-retries=5"
+        options: "--health-cmd=\"mysqladmin ping -uroot -ptestpassword || exit 1\" --health-interval=10s --health-timeout=5s --health-retries=5"
         
     steps:
       # Checkout commit
