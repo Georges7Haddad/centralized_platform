@@ -19,11 +19,11 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
+          MYSQL_ROOT_PASSWORD: testpassword
           DATABASE_HOST: 127.0.0.1
           DATABASE_USERNAME: testuser
           DATABASE_PASSWORD: testpassword
           DATABASE_NAME: testdb
-          MYSQL_ROOT_PASSWORD: testpassword
         ports:
           - "3306:3306"
         options: "--health-cmd=\"mysqladmin ping -uroot -ptestpassword || exit 1\" --health-interval=10s --health-timeout=5s --health-retries=5"
@@ -62,5 +62,10 @@ jobs:
 
       # Perform Health Check
       - name: Perform Health Check
+        env:
+          DATABASE_HOST: 127.0.0.1
+          DATABASE_USERNAME: testuser
+          DATABASE_PASSWORD: testpassword
+          DATABASE_NAME: testdb
         run: |
           curl --fail http://localhost:8000/health
