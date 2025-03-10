@@ -23,9 +23,9 @@ jobs:
           MYSQL_USER: testuser
           MYSQL_PASSWORD: testpassword
         ports:
-          - 3306:3306
+          - "3306:3306"
         options: >
-          --health-cmd="mysqladmin ping -uroot -prootpassword" 
+          --health-cmd="mysqladmin ping -uroot -prootpassword || exit 1" 
           --health-interval=10s 
           --health-timeout=5s 
           --health-retries=5
