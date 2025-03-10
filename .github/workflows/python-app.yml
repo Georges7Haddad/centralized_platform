@@ -68,4 +68,4 @@ jobs:
           DATABASE_PASSWORD: testpassword
           DATABASE_NAME: testdb
         run: |
-          curl --fail http://localhost:8000/health
+          curl -v --fail http://localhost:8000/health
