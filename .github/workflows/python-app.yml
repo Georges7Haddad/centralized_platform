@@ -60,12 +60,6 @@ jobs:
       # Start server
       - name: Start server
         working-directory: backend
-        env:
-          DATABASE_URL: mysql+pymysql://testuser:testpassword@127.0.0.1:3306/testdb
-          DATABASE_HOST: 127.0.0.1
-          DATABASE_USERNAME: testuser
-          DATABASE_PASSWORD: testpassword
-          DATABASE_NAME: testdb
         run: |
           fastapi dev src/server.py &
 
@@ -73,8 +67,4 @@ jobs:
       - name: Perform Health Check
         run: |
           curl --fail http://localhost:8000/health
-          interval: 2s
-          timeout: 5s
-          retries: 3
-          start_period: 5s
 
