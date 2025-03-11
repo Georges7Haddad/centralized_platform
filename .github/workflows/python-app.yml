@@ -60,6 +60,12 @@ jobs:
       # Start server
       - name: Start server
         working-directory: backend
+        env:
+          DATABASE_URL: mysql+pymysql://testuser:testpassword@127.0.0.1:3306/testdb
+          DATABASE_HOST: 127.0.0.1
+          DATABASE_USERNAME: testuser
+          DATABASE_PASSWORD: testpassword
+          DATABASE_NAME: testdb
         run: |
           fastapi dev src/server.py &
 
