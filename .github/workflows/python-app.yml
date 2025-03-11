@@ -27,10 +27,6 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: testpassword
-          DATABASE_HOST: 127.0.0.1
-          DATABASE_USERNAME: testuser
-          DATABASE_PASSWORD: testpassword
-          DATABASE_NAME: testdb
         ports:
           - "3306:3306"
         options: "--health-cmd=\"mysqladmin ping -uroot -ptestpassword || exit 1\" --health-interval=10s --health-timeout=5s --health-retries=5"
@@ -65,7 +61,8 @@ jobs:
       - name: Start server
         working-directory: backend
         run: |
-          fastapi dev src/server.py &
+          nohup uvicorn src.server:app --host 0.0.0.0 --port 8000 > server.log 2>&1 &
+          sleep 5  # Give time for the server to start
 
       # Perform Health Check
       - name: Perform Health Check
