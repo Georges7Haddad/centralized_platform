@@ -67,3 +67,8 @@ jobs:
       - name: Perform Health Check
         run: |
           curl --fail http://localhost:8000/health
+        interval: 2s
+        timeout: 5s
+        retries: 3
+        start_period: 5s
+
