@@ -4,8 +4,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.graphql.user import user_schema
+from src.database.database import create_db_and_tables
 
 app = FastAPI()
+create_db_and_tables()
 
 origins = [
 	"http://localhost:3000",  # React or frontend running locally
