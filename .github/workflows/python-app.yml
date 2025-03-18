@@ -47,17 +47,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/dependencies.txt
 
-      - name: Wait for MySQL
-        run: |
-          for i in {1..30}; do
-            if mysqladmin ping -h 127.0.0.1 -u testuser --password=testpassword; then
-              echo "MySQL is up"
-              break
-            fi
-            echo "Waiting for MySQL..."
-            sleep 2
-          done
-
       # Run linter
       - name: Lint with ruff
         run: ruff check
