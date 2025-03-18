@@ -61,17 +61,22 @@ jobs:
       - name: Start server
         working-directory: backend
         run: |
-          uvicorn src.server:app --host 0.0.0.0 --port 8000 &
+          nohup uvicorn src.server:app --host 0.0.0.0 --port 8000 --reload > uvicorn.log 2>&1 &
+          sleep 5  # Give it time to start
 
       # Perform Health Check
       - name: Wait for FastAPI server
         run: |
           for i in {1..30}; do
-            if curl --fail http://localhost:8000/health; then
+            if curl --fail http://127.0.0.1:8000/health; then
               echo "Server is up"
               break
             fi
             echo "Waiting for FastAPI..."
             sleep 2
           done
+
+      - name: Display FastAPI logs if failed
+        if: failure()
+        run: cat backend/uvicorn.log
 
