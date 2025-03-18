@@ -17,7 +17,7 @@ jobs:
     # MYSQL Sevice
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: testdb
@@ -29,7 +29,7 @@ jobs:
 
     # Enviromental variables (matching the ones in database.py)
     env:
-      DATABASE_HOST: 127.0.0.1
+      DATABASE_HOST: localhost
       DATABASE_USERNAME: user
       DATABASE_PASSWORD: password
       DATABASE_NAME: testdb
