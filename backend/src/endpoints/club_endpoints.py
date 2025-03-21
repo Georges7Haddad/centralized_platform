@@ -1,5 +1,6 @@
 from fastapi import HTTPException
 from sqlmodel import Session
+
 from src.database.database import get_session_dependency
 from src.models.club_model import (
 	Club,
