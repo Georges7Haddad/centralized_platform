@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+service ChatService {
+  rpc HealthCheck (HealthCheckRequest) returns (HealthCheckReply) {}
+}
+
+message HealthCheckRequest {
+  string message = 1;
+}
+
+message HealthCheckReply {
+  string message = 1;
+}
