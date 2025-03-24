@@ -1,4 +1,5 @@
 from typing import Annotated
+
 from sqlmodel import Field, SQLModel
 
 '''Message
