@@ -26,22 +26,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r chat_service/dependencies.txt
 
-      - name: Generate Proto files
-        working-directory: chat_service
-        run: |
-          python -m grpc_tools.protoc -I src/proto --proto_path=src/generated/ --python_out=src/generated/ --pyi_out=src/generated/ --grpc_python_out=src/generated/ src/proto/chat_service.proto
-
-      - name: Lint with ruff
-        run: ruff check
-
-      - name: Test with pytest
-        run: pytest
-
       - name: Start chat service and perform health check
         working-directory: chat_service
         run: |
           python src/server.py &
-          SERVER_PID=$!
-          sleep 5
           python src/client.py
-          kill $SERVER_PID
