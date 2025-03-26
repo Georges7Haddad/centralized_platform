@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-package chat_service;
-
 option python_package = "generated";
 
 service ChatService {
