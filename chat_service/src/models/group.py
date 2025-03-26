@@ -1,9 +1,7 @@
-from typing import Optional, List, TYPE_CHECKING
+from typing import Optional, List
 from datetime import datetime
 from sqlmodel import Field, SQLModel, Relationship
-
-if TYPE_CHECKING:
-    from .user_model import UserBase
+from backend.src.models.user_model import UserBase
 
 class Group(SQLModel, table=True):
     id: int = Field(primary_key=True)
