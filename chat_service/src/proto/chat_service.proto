@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-option python_package = "generated";
-
 service ChatService {
   rpc HealthCheck (HealthCheckRequest) returns (HealthCheckReply) {}
 }
