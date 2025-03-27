@@ -8,12 +8,12 @@ class Group(SQLModel, table=True):
     name: str
     description: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
-    created_by_id: int = Field(foreign_key="user.id")
+    creator_id: int = Field(foreign_key="user.id")
 
     # Relationships
     created_by: Optional["UserBase"] = Relationship(
         back_populates="created_groups",
-        sa_relationship_kwargs={"foreign_keys": "[Group.created_by_id]"}
+        sa_relationship_kwargs={"foreign_keys": "[Group.created_id]"}
     )
     members: List["GroupMember"] = Relationship(back_populates="group")
 
