@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package messaging;
+
+enum MessageType{
+    MESSAGE_INVALID = 0;
+    MESSAGE_TEXT = 1;
+    MESSAGE_IMAGE = 2;
+    MESSAGE_VIDEO = 3;
+}
+
+
+message SendMessageRequest{
+    string sender =1;
+    string receiver =2;
+    string content = 3;
+    MessageType type = 4;
+    string message_id =5;
+}
