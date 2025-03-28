@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package groupchat;
+
+message CreateGroupRequest {
+  string group_name = 1;
+  string creator_id = 2;
+  repeated string member_ids = 3;
+}
+
+message GroupResponse {
+  int32 status_code = 1;
+  string message = 2;
+}
+
+message AddMembersToGroupRequest {
+  string group_id = 1;
+  string adder_id = 2;
+  repeated string member_ids = 3;
+}
+
+service GroupService {
+  rpc CreateGroup(CreateGroupRequest) returns (GroupResponse);
+  rpc AddMembersToGroup(AddMembersToGroupRequest) returns (GroupResponse);
+}
