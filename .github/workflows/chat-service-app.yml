@@ -27,8 +27,12 @@ jobs:
       - name: Install dependencies
         run: pip install -r chat_service/dependencies.txt
 
-      - name: Start chat service and perform health check
+      - name: Start chat service Server
         working-directory: chat_service
         run: |
           python src/server.py &
+
+      - name: Start chat service Client
+        working-directory: chat_service
+        run: |
           python src/client.py
