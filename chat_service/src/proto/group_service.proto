@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package groupchat;
+package group_service;
 
 message CreateGroupRequest {
   string group_name = 1;
@@ -19,7 +19,3 @@ message AddMembersToGroupRequest {
   repeated string member_ids = 3;
 }
 
-service GroupService {
-  rpc CreateGroup(CreateGroupRequest) returns (GroupResponse);
-  rpc AddMembersToGroup(AddMembersToGroupRequest) returns (GroupResponse);
-}
