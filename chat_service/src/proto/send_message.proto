@@ -21,6 +21,6 @@ message SendMessageRequest{
 }
 
 message SendMessageResponse{
-    int status_code=1;
+    int32 status_code=1;
     string message_id=2;
 }
