@@ -1,7 +1,13 @@
 syntax = "proto3";
 
+import "group_service.proto";
+
+package chat_service;
+
 service ChatService {
   rpc HealthCheck (HealthCheckRequest) returns (HealthCheckReply) {}
+  rpc CreateGroup (group_service.CreateGroupRequest) returns (group_service.GroupResponse) {}
+  rpc AddMembersToGroup (group_service.AddMembersToGroupRequest) returns (group_service.GroupResponse) {}
 }
 
 message HealthCheckRequest {
