@@ -7,11 +7,9 @@ DESCRIPTOR: _descriptor.FileDescriptor
 
 class MessageType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
-    MESSAGE_INVALID: _ClassVar[MessageType]
     MESSAGE_TEXT: _ClassVar[MessageType]
     MESSAGE_IMAGE: _ClassVar[MessageType]
     MESSAGE_VIDEO: _ClassVar[MessageType]
-MESSAGE_INVALID: MessageType
 MESSAGE_TEXT: MessageType
 MESSAGE_IMAGE: MessageType
 MESSAGE_VIDEO: MessageType

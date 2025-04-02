@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rmessage.proto\x12\tmessaging\"\x81\x01\n\x12SendMessageRequest\x12\x0e\n\x06sender\x18\x01 \x01(\t\x12\x10\n\x08receiver\x18\x02 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x01(\t\x12$\n\x04type\x18\x04 \x01(\x0e\x32\x16.messaging.MessageType\x12\x12\n\nmessage_id\x18\x05 \x01(\t*Z\n\x0bMessageType\x12\x13\n\x0fMESSAGE_INVALID\x10\x00\x12\x10\n\x0cMESSAGE_TEXT\x10\x01\x12\x11\n\rMESSAGE_IMAGE\x10\x02\x12\x11\n\rMESSAGE_VIDEO\x10\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rmessage.proto\x12\tmessaging\"\x81\x01\n\x12SendMessageRequest\x12\x0e\n\x06sender\x18\x01 \x01(\t\x12\x10\n\x08receiver\x18\x02 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x01(\t\x12$\n\x04type\x18\x04 \x01(\x0e\x32\x16.messaging.MessageType\x12\x12\n\nmessage_id\x18\x05 \x01(\t*E\n\x0bMessageType\x12\x10\n\x0cMESSAGE_TEXT\x10\x00\x12\x11\n\rMESSAGE_IMAGE\x10\x01\x12\x11\n\rMESSAGE_VIDEO\x10\x02\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,7 +32,7 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'message_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_MESSAGETYPE']._serialized_start=160
-  _globals['_MESSAGETYPE']._serialized_end=250
+  _globals['_MESSAGETYPE']._serialized_end=229
   _globals['_SENDMESSAGEREQUEST']._serialized_start=29
   _globals['_SENDMESSAGEREQUEST']._serialized_end=158
 # @@protoc_insertion_point(module_scope)

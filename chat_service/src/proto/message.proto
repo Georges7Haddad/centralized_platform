@@ -3,10 +3,9 @@ syntax = "proto3";
 package messaging;
 
 enum MessageType{
-    MESSAGE_INVALID = 0;
-    MESSAGE_TEXT = 1;
-    MESSAGE_IMAGE = 2;
-    MESSAGE_VIDEO = 3;
+    MESSAGE_TEXT = 0;
+    MESSAGE_IMAGE = 1;
+    MESSAGE_VIDEO = 2;
 }
 
 
