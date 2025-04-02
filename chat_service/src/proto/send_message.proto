@@ -8,6 +8,9 @@ enum MessageType{
     MESSAGE_VIDEO = 2;
 }
 
+service SendMessage{
+    rpc sendmessage (SendMessageRequest) returns(SendMessageResponse);
+}
 
 message SendMessageRequest{
     string sender =1;
@@ -15,4 +18,9 @@ message SendMessageRequest{
     string content = 3;
     MessageType type = 4;
     string message_id =5;
+}
+
+message SendMessageResponse{
+    int status_code=1;
+    string message_id=2;
 }
