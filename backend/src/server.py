@@ -3,7 +3,11 @@ from typing import Union
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.endpoints.course_endpoints import router
 from src.graphql.user import user_schema
+
+app = FastAPI()
+app.include_router(router)
 
 app = FastAPI()
 
