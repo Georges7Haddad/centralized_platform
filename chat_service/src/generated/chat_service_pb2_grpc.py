@@ -41,17 +41,17 @@ class ChatServiceStub(object):
             channel: A grpc.Channel.
         """
         self.HealthCheck = channel.unary_unary(
-                '/chat_service.ChatService/HealthCheck',
+                '/generated.ChatService/HealthCheck',
                 request_serializer=chat__service__pb2.HealthCheckRequest.SerializeToString,
                 response_deserializer=chat__service__pb2.HealthCheckReply.FromString,
                 _registered_method=True)
         self.CreateGroup = channel.unary_unary(
-                '/chat_service.ChatService/CreateGroup',
+                '/generated.ChatService/CreateGroup',
                 request_serializer=group__service__pb2.CreateGroupRequest.SerializeToString,
                 response_deserializer=group__service__pb2.GroupResponse.FromString,
                 _registered_method=True)
         self.AddMembersToGroup = channel.unary_unary(
-                '/chat_service.ChatService/AddMembersToGroup',
+                '/generated.ChatService/AddMembersToGroup',
                 request_serializer=group__service__pb2.AddMembersToGroupRequest.SerializeToString,
                 response_deserializer=group__service__pb2.GroupResponse.FromString,
                 _registered_method=True)
@@ -101,7 +101,7 @@ def add_ChatServiceServicer_to_server(servicer, server):
         "generated.ChatService", rpc_method_handlers
     )
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('chat_service.ChatService', rpc_method_handlers)
+    server.add_registered_method_handlers('generated.ChatService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -122,7 +122,7 @@ class ChatService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/chat_service.ChatService/HealthCheck',
+            '/generated.ChatService/HealthCheck',
             chat__service__pb2.HealthCheckRequest.SerializeToString,
             chat__service__pb2.HealthCheckReply.FromString,
             options,
@@ -149,7 +149,7 @@ class ChatService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/chat_service.ChatService/CreateGroup',
+            '/generated.ChatService/CreateGroup',
             group__service__pb2.CreateGroupRequest.SerializeToString,
             group__service__pb2.GroupResponse.FromString,
             options,
@@ -176,7 +176,7 @@ class ChatService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/chat_service.ChatService/AddMembersToGroup',
+            '/generated.ChatService/AddMembersToGroup',
             group__service__pb2.AddMembersToGroupRequest.SerializeToString,
             group__service__pb2.GroupResponse.FromString,
             options,
