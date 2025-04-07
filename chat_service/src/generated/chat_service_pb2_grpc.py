@@ -3,6 +3,7 @@
 import grpc
 
 import generated.chat_service_pb2 as chat__service__pb2
+import generated.group_service_pb2 as group__service__pb2
 
 GRPC_GENERATED_VERSION = '1.71.0'
 GRPC_VERSION = grpc.__version__
@@ -11,11 +12,17 @@ _version_not_supported = False
 try:
     from grpc._utilities import first_version_is_lower
     _version_not_supported = first_version_is_lower(GRPC_VERSION, GRPC_GENERATED_VERSION)
+    _version_not_supported = first_version_is_lower(GRPC_VERSION, GRPC_GENERATED_VERSION)
 except ImportError:
     _version_not_supported = True
 
 if _version_not_supported:
     raise RuntimeError(
+        f'The grpc package installed is at version {GRPC_VERSION},'
+        + ' but the generated code in chat_service_pb2_grpc.py depends on'
+        + f' grpcio>={GRPC_GENERATED_VERSION}.'
+        + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
+        + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
         f'The grpc package installed is at version {GRPC_VERSION},'
         + ' but the generated code in chat_service_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
@@ -34,9 +41,19 @@ class ChatServiceStub(object):
             channel: A grpc.Channel.
         """
         self.HealthCheck = channel.unary_unary(
-                '/generated.ChatService/HealthCheck',
+                '/chat_service.ChatService/HealthCheck',
                 request_serializer=chat__service__pb2.HealthCheckRequest.SerializeToString,
                 response_deserializer=chat__service__pb2.HealthCheckReply.FromString,
+                _registered_method=True)
+        self.CreateGroup = channel.unary_unary(
+                '/chat_service.ChatService/CreateGroup',
+                request_serializer=group__service__pb2.CreateGroupRequest.SerializeToString,
+                response_deserializer=group__service__pb2.GroupResponse.FromString,
+                _registered_method=True)
+        self.AddMembersToGroup = channel.unary_unary(
+                '/chat_service.ChatService/AddMembersToGroup',
+                request_serializer=group__service__pb2.AddMembersToGroupRequest.SerializeToString,
+                response_deserializer=group__service__pb2.GroupResponse.FromString,
                 _registered_method=True)
 
 
@@ -44,6 +61,18 @@ class ChatServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def HealthCheck(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateGroup(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AddMembersToGroup(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -57,11 +86,22 @@ def add_ChatServiceServicer_to_server(servicer, server):
                     request_deserializer=chat__service__pb2.HealthCheckRequest.FromString,
                     response_serializer=chat__service__pb2.HealthCheckReply.SerializeToString,
             ),
+            'CreateGroup': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateGroup,
+                    request_deserializer=group__service__pb2.CreateGroupRequest.FromString,
+                    response_serializer=group__service__pb2.GroupResponse.SerializeToString,
+            ),
+            'AddMembersToGroup': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddMembersToGroup,
+                    request_deserializer=group__service__pb2.AddMembersToGroupRequest.FromString,
+                    response_serializer=group__service__pb2.GroupResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'generated.ChatService', rpc_method_handlers)
+        "generated.ChatService", rpc_method_handlers
+    )
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('generated.ChatService', rpc_method_handlers)
+    server.add_registered_method_handlers('chat_service.ChatService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -82,9 +122,63 @@ class ChatService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/generated.ChatService/HealthCheck',
+            '/chat_service.ChatService/HealthCheck',
             chat__service__pb2.HealthCheckRequest.SerializeToString,
             chat__service__pb2.HealthCheckReply.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def CreateGroup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/chat_service.ChatService/CreateGroup',
+            group__service__pb2.CreateGroupRequest.SerializeToString,
+            group__service__pb2.GroupResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def AddMembersToGroup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/chat_service.ChatService/AddMembersToGroup',
+            group__service__pb2.AddMembersToGroupRequest.SerializeToString,
+            group__service__pb2.GroupResponse.FromString,
             options,
             channel_credentials,
             insecure,
