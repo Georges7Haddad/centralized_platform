@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package messaging;
+
+enum MessageType{
+    MESSAGE_TEXT = 0;
+    MESSAGE_IMAGE = 1;
+    MESSAGE_VIDEO = 2;
+}
+
+service SendMessage{
+    rpc sendmessage (SendMessageRequest) returns(SendMessageResponse);
+}
+
+message SendMessageRequest{
+    string sender =1;
+    string receiver =2;
+    string content = 3;
+    MessageType type = 4;
+    string message_id =5;
+}
+
+message SendMessageResponse{
+    int32 status_code=1;
+    string message_id=2;
+}
