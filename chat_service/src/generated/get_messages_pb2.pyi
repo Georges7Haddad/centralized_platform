@@ -15,13 +15,17 @@ MESSAGE_TEXT: MessageType
 MESSAGE_IMAGE: MessageType
 MESSAGE_VIDEO: MessageType
 
-class GetMessageRequest(_message.Message):
-    __slots__ = ("user_1", "user_2")
+class GetMessagesRequest(_message.Message):
+    __slots__ = ("user_1", "user_2", "pagesize", "page_number")
     USER_1_FIELD_NUMBER: _ClassVar[int]
     USER_2_FIELD_NUMBER: _ClassVar[int]
+    PAGESIZE_FIELD_NUMBER: _ClassVar[int]
+    PAGE_NUMBER_FIELD_NUMBER: _ClassVar[int]
     user_1: str
     user_2: str
-    def __init__(self, user_1: _Optional[str] = ..., user_2: _Optional[str] = ...) -> None: ...
+    pagesize: int
+    page_number: int
+    def __init__(self, user_1: _Optional[str] = ..., user_2: _Optional[str] = ..., pagesize: _Optional[int] = ..., page_number: _Optional[int] = ...) -> None: ...
 
 class Message(_message.Message):
     __slots__ = ("message_id", "timestamp", "sender", "receiver", "content", "type", "read", "deleted")
@@ -43,7 +47,7 @@ class Message(_message.Message):
     deleted: bool
     def __init__(self, message_id: _Optional[str] = ..., timestamp: _Optional[str] = ..., sender: _Optional[str] = ..., receiver: _Optional[str] = ..., content: _Optional[str] = ..., type: _Optional[_Union[MessageType, str]] = ..., read: bool = ..., deleted: bool = ...) -> None: ...
 
-class GetMessageResponse(_message.Message):
+class GetMessagesResponse(_message.Message):
     __slots__ = ("messages", "status_code")
     MESSAGES_FIELD_NUMBER: _ClassVar[int]
     STATUS_CODE_FIELD_NUMBER: _ClassVar[int]

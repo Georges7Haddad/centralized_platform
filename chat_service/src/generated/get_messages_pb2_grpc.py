@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import get_message_pb2 as get__message__pb2
+import get_messages_pb2 as get__messages__pb2
 
 GRPC_GENERATED_VERSION = '1.70.0'
 GRPC_VERSION = grpc.__version__
@@ -17,7 +17,7 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + ' but the generated code in get_message_pb2_grpc.py depends on'
+        + ' but the generated code in get_messages_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
@@ -35,8 +35,8 @@ class GetMessageStub(object):
         """
         self.getmessage = channel.unary_unary(
                 '/messaging.GetMessage/getmessage',
-                request_serializer=get__message__pb2.GetMessageRequest.SerializeToString,
-                response_deserializer=get__message__pb2.GetMessageResponse.FromString,
+                request_serializer=get__messages__pb2.GetMessagesRequest.SerializeToString,
+                response_deserializer=get__messages__pb2.GetMessagesResponse.FromString,
                 _registered_method=True)
 
 
@@ -54,8 +54,8 @@ def add_GetMessageServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'getmessage': grpc.unary_unary_rpc_method_handler(
                     servicer.getmessage,
-                    request_deserializer=get__message__pb2.GetMessageRequest.FromString,
-                    response_serializer=get__message__pb2.GetMessageResponse.SerializeToString,
+                    request_deserializer=get__messages__pb2.GetMessagesRequest.FromString,
+                    response_serializer=get__messages__pb2.GetMessagesResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -83,8 +83,8 @@ class GetMessage(object):
             request,
             target,
             '/messaging.GetMessage/getmessage',
-            get__message__pb2.GetMessageRequest.SerializeToString,
-            get__message__pb2.GetMessageResponse.FromString,
+            get__messages__pb2.GetMessagesRequest.SerializeToString,
+            get__messages__pb2.GetMessagesResponse.FromString,
             options,
             channel_credentials,
             insecure,

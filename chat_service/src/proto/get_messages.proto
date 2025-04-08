@@ -9,14 +9,15 @@ enum MessageType{
 }
 
 service GetMessage{
-    rpc getmessage (GetMessageRequest) returns(GetMessageResponse);
+    rpc getmessage (GetMessagesRequest) returns(GetMessagesResponse);
 }
 
 
-message GetMessageRequest{
+message GetMessagesRequest{
     string user_1 = 1;
     string user_2 =2; //might be a user or group_id
-
+    int64 pagesize = 3;
+    int64 page_number = 4;
 }
 
 message Message{
@@ -30,7 +31,7 @@ message Message{
     bool deleted=8;
 }
 
-message GetMessageResponse{
+message GetMessagesResponse{
     repeated Message messages=1;
     int32 status_code=2;
 }
