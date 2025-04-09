@@ -14,7 +14,8 @@ class UserBase(SQLModel):
 
 	# Relationships (strings to avoid circular import issues)
 	# created_groups: list["Group"] = Relationship(back_populates="created_by")
-	# group_memberships: list["GroupMember"] = Relationship(back_populates="user")
+	# group_memberships: list["GroupMember"] = 
+	# Relationship(back_populates="user")
 	# chats: list["Chat"] = Relationship(back_populates="user_chats")
 
 
