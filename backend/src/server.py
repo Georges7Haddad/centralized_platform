@@ -3,9 +3,14 @@ from typing import Union
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.database.database import create_db_and_tables
 from src.graphql.user import user_schema
 
 app = FastAPI()
+
+@app.on_event("startup")
+def startup_event():
+	create_db_and_tables()
 
 origins = [
 	"http://localhost:3000",  # React or frontend running locally
