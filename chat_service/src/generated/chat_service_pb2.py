@@ -24,17 +24,17 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12\x63hat_service.proto\x12\tgenerated\"%\n\x12HealthCheckRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\"#\n\x10HealthCheckReply\x12\x0f\n\x07message\x18\x01 \x01(\t2Z\n\x0b\x43hatService\x12K\n\x0bHealthCheck\x12\x1d.generated.HealthCheckRequest\x1a\x1b.generated.HealthCheckReply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12\x63hat_service.proto\"%\n\x12HealthCheckRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\"#\n\x10HealthCheckReply\x12\x0f\n\x07message\x18\x01 \x01(\t2F\n\x0b\x43hatService\x12\x37\n\x0bHealthCheck\x12\x13.HealthCheckRequest\x1a\x11.HealthCheckReply\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'chat_service_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_HEALTHCHECKREQUEST']._serialized_start=33
-  _globals['_HEALTHCHECKREQUEST']._serialized_end=70
-  _globals['_HEALTHCHECKREPLY']._serialized_start=72
-  _globals['_HEALTHCHECKREPLY']._serialized_end=107
-  _globals['_CHATSERVICE']._serialized_start=109
-  _globals['_CHATSERVICE']._serialized_end=199
+  _globals['_HEALTHCHECKREQUEST']._serialized_start=22
+  _globals['_HEALTHCHECKREQUEST']._serialized_end=59
+  _globals['_HEALTHCHECKREPLY']._serialized_start=61
+  _globals['_HEALTHCHECKREPLY']._serialized_end=96
+  _globals['_CHATSERVICE']._serialized_start=98
+  _globals['_CHATSERVICE']._serialized_end=168
 # @@protoc_insertion_point(module_scope)

@@ -2,9 +2,9 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import generated.chat_service_pb2 as chat__service__pb2
+import send_message_pb2 as send__message__pb2
 
-GRPC_GENERATED_VERSION = '1.71.0'
+GRPC_GENERATED_VERSION = '1.70.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -17,14 +17,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + ' but the generated code in chat_service_pb2_grpc.py depends on'
+        + ' but the generated code in send_message_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class ChatServiceStub(object):
+class SendMessageStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -33,44 +33,43 @@ class ChatServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.HealthCheck = channel.unary_unary(
-                '/generated.ChatService/HealthCheck',
-                request_serializer=chat__service__pb2.HealthCheckRequest.SerializeToString,
-                response_deserializer=chat__service__pb2.HealthCheckReply.FromString,
+        self.sendmessage = channel.unary_unary(
+                '/messaging.SendMessage/sendmessage',
+                request_serializer=send__message__pb2.SendMessageRequest.SerializeToString,
+                response_deserializer=send__message__pb2.SendMessageResponse.FromString,
                 _registered_method=True)
 
 
-class ChatServiceServicer(object):
+class SendMessageServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def HealthCheck(self, request, context):
+    def sendmessage(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_ChatServiceServicer_to_server(servicer, server):
+def add_SendMessageServicer_to_server(servicer, server):
     rpc_method_handlers = {
-
-            'HealthCheck': grpc.unary_unary_rpc_method_handler(
-                    servicer.HealthCheck,
-                    request_deserializer=chat__service__pb2.HealthCheckRequest.FromString,
-                    response_serializer=chat__service__pb2.HealthCheckReply.SerializeToString,
+            'sendmessage': grpc.unary_unary_rpc_method_handler(
+                    servicer.sendmessage,
+                    request_deserializer=send__message__pb2.SendMessageRequest.FromString,
+                    response_serializer=send__message__pb2.SendMessageResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'generated.ChatService', rpc_method_handlers)
+            'messaging.SendMessage', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('generated.ChatService', rpc_method_handlers)
+    server.add_registered_method_handlers('messaging.SendMessage', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class ChatService(object):
+class SendMessage(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def HealthCheck(request,
+    def sendmessage(request,
             target,
             options=(),
             channel_credentials=None,
@@ -83,9 +82,9 @@ class ChatService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/generated.ChatService/HealthCheck',
-            chat__service__pb2.HealthCheckRequest.SerializeToString,
-            chat__service__pb2.HealthCheckReply.FromString,
+            '/messaging.SendMessage/sendmessage',
+            send__message__pb2.SendMessageRequest.SerializeToString,
+            send__message__pb2.SendMessageResponse.FromString,
             options,
             channel_credentials,
             insecure,
