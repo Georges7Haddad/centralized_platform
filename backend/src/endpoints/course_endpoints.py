@@ -1,121 +1,119 @@
-from fastapi import Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
 
-# from src.database.database import get_session
-from src.endpoints.local_connection import get_session
-from src.endpoints.local_session import app
-from src.models.course_model import (
-	Course,
-	CourseBase,
-	CourseCreate,
-	CourseUpdate,
+from src.database.database import get_session
+from src.models.course_model import Course
+from src.models.instructor_model import (
+	Instructor,
+	InstructorBase,
+	InstructorCourseLink,
+	InstructorCreate,
+	InstructorUpdate,
 )
-from src.models.instructor_model import Instructor, InstructorCourseLink
-from src.models.student_model import Student, StudentCourseLink
 
-# from src.server import app
+router = APIRouter()
 
 get_session_dependency = Depends(get_session)
 
 
-# create a course
-@app.post("/courses/", response_model=CourseBase)
-def create_course(
-	course: CourseCreate, session: Session = get_session_dependency
+# create an instructor
+@router.post("/instructors/", response_model=InstructorBase)
+def create_instructor(
+	instructor: InstructorCreate, session: Session = get_session_dependency
 ):
-	db_course = Course.model_validate(course)
-	session.add(db_course)
+	db_instructor = Instructor.model_validate(instructor)
+	session.add(db_instructor)
 	session.commit()
-	session.refresh(db_course)
-	return db_course
+	session.refresh(db_instructor)
+	return db_instructor
 
 
-# read one course
-@app.get("/courses/{course_crn}", response_model=CourseBase)
-def read_course(course_crn: int, session: Session = get_session_dependency):
-	course = session.get(Course, course_crn)
-	if not course:
-		raise HTTPException(status_code=404, detail="Course not found")
-	return course
-
-
-# getting students for a course
-@app.get("/courses/{course_crn}/students")
-def read_course_students(
-	course_crn: int, session: Session = get_session_dependency
+# read one instructor
+@router.get("/instructors/{instructor_id}", response_model=InstructorBase)
+def read_instructor(
+	instructor_id: int, session: Session = get_session_dependency
 ):
-	statement = (
-		select(Student)
-		.join(
-			StudentCourseLink,
-			StudentCourseLink.student_id == Student.id,
-		)
-		.where(InstructorCourseLink.course_crn == course_crn)
-	)
-	students = session.exec(statement).all()
-	if not students:
-		raise HTTPException(
-			status_code=404, detail="No students found for this course."
-		)
-	return students
+	instructor = session.get(Instructor, instructor_id)
+	if not instructor:
+		raise HTTPException(status_code=404, detail="Instructor not found")
+	return instructor
 
 
-# getting all instructors for a course
-@app.get("/courses/{course_crn}/instructors")
-def read_course_instructors(
-	course_crn: int, session: Session = get_session_dependency
-):
-	statement = (
-		select(Instructor)
-		.join(
-			InstructorCourseLink,
-			InstructorCourseLink.instructor_id == Instructor.id,
-		)
-		.where(InstructorCourseLink.course_crn == course_crn)
-	)
-	instructors = session.exec(statement).all()
-	if not instructors:
-		raise HTTPException(
-			status_code=404, detail="No instructors found for this course."
-		)
-	return instructors
-
-
-# update a course
-@app.patch("/courses/{course_crn}", response_model=CourseBase)
-def update_course(
+# assign instructor to course
+@router.post("/instructors/{instructor_id}/register_course/{course_crn}")
+def assign_instructor_to_course(
+	instructor_id: int,
 	course_crn: int,
-	course: CourseUpdate,
 	session: Session = get_session_dependency,
 ):
-	with session:
-		db_course = session.get(Course, course_crn)
-		if not db_course:
-			raise HTTPException(status_code=404, detail="Course not found")
-		course_data = course.model_dump(exclude_unset=True)
-		db_course.sqlmodel_update(course_data)
-		session.add(db_course)
-		session.commit()
-		session.refresh(db_course)
-		return db_course
+	instructor = session.get(Instructor, instructor_id)
+	course = session.get(Course, course_crn)
+	if not instructor:
+		raise HTTPException(status_code=404, detail="Instructor not found")
+	if not course:
+		raise HTTPException(status_code=404, detail="Course not found")
+	link = InstructorCourseLink(
+		instructor_id=instructor_id, course_crn=course_crn
+	)
+	session.add(link)
+	session.commit()
+	return {"message": "Instructor added to course"}
 
 
-# delete a course
-@app.delete("/courses/{course_crn}")
-def delete_course(course_crn: int, session: Session = get_session_dependency):
-	with session:
-		course = session.get(Course, course_crn)
-		if not course:
-			raise HTTPException(status_code=404, detail="Course not found")
+@router.get("/instructors/{instructor_id}/courses")
+def read_instructor_courses(
+	instructor_id: int, session: Session = get_session_dependency
+):
+	statement = (
+		select(Course)
+		.join(
+			InstructorCourseLink,
+			InstructorCourseLink.course_crn == Course.crn,
+		)
+		.where(InstructorCourseLink.instructor_id == instructor_id)
+	)
+	courses = session.exec(statement).all()
 
-		session.query(InstructorCourseLink).filter_by(
-			course_crn=course_crn
-		).delete()
-		session.query(StudentCourseLink).filter_by(
-			course_crn=course_crn
-		).delete()
+	if not courses:
+		raise HTTPException(
+			status_code=404, detail="No courses found for this instructor."
+		)
 
-		session.delete(course)
-		session.commit()
+	return courses
 
-		return {"ok": True}
+
+# update instructor
+@router.patch("/instructors/{instructor_id}", response_model=InstructorBase)
+def update_instructor(
+	instructor_id: int,
+	instructor: InstructorUpdate,
+	session: Session = get_session_dependency,
+):
+	db_instructor = session.get(Instructor, instructor_id)
+	if not db_instructor:
+		raise HTTPException(status_code=404, detail="Instructor not found")
+	instructor_data = instructor.model_dump(exclude_unset=True)
+	db_instructor.sqlmodel_update(instructor_data)
+	session.add(db_instructor)
+	session.commit()
+	session.refresh(db_instructor)
+	return db_instructor
+
+
+# delete an instructor
+@router.delete("/instructors/{instructor_id}")
+def delete_instructor(
+	instructor_id: int, session: Session = get_session_dependency
+):
+	instructor = session.get(Instructor, instructor_id)
+	if not instructor:
+		raise HTTPException(status_code=404, detail="Instructor not found")
+
+	session.query(InstructorCourseLink).filter_by(
+		instructor_id=instructor_id
+	).delete()
+
+	session.delete(instructor)
+	session.commit()
+
+	return {"ok": True}
