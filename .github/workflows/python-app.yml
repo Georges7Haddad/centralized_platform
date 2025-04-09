@@ -20,6 +20,7 @@ jobs:
       DATABASE_USERNAME: user
       DATABASE_PASSWORD: password
       DATABASE_NAME: testdb
+    
     # MYSQL Sevice
     services:
       mysql:
