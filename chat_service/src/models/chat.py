@@ -1,6 +1,5 @@
-from typing import Optional
 from datetime import datetime
-from sqlmodel import SQLModel, Field, Relationship
+from sqlmodel import SQLModel, Field
 #from backend.src.models.user_model import UserBase
 
 class Chat(SQLModel, table=True):
