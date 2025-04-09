@@ -10,7 +10,6 @@ from src.models.student_model import (
 	StudentCreate,
 	StudentUpdate,
 )
-from src.server import app
 
 router = APIRouter()
 
@@ -18,7 +17,7 @@ get_session_dependency = Depends(get_session)
 
 
 # create a student
-@app.post("/students/", response_model=StudentBase)
+@router.post("/students/", response_model=StudentBase)
 def create_student(
 	student: StudentCreate, session: Session = get_session_dependency
 ):
@@ -30,7 +29,7 @@ def create_student(
 
 
 # read one student
-@app.get("/students/{student_id}", response_model=StudentBase)
+@router.get("/students/{student_id}", response_model=StudentBase)
 def read_student(student_id: int, session: Session = get_session_dependency):
 	student = session.get(Student, student_id)
 	if not student:
@@ -39,7 +38,7 @@ def read_student(student_id: int, session: Session = get_session_dependency):
 
 
 # register student in course
-@app.post("/students/{student_id}/register_course/{course_crn}")
+@router.post("/students/{student_id}/register_course/{course_crn}")
 def register_student_to_course(
 	student_id: int, course_crn: int, session: Session = get_session_dependency
 ):
@@ -56,7 +55,7 @@ def register_student_to_course(
 
 
 # get all courses for a student
-@app.get("/courses-for-student/{student_id}")
+@router.get("/courses-for-student/{student_id}")
 def read_student_courses(
 	student_id: int, session: Session = get_session_dependency
 ):
@@ -77,7 +76,7 @@ def read_student_courses(
 
 
 # update a student
-@app.patch("/students/{student_id}", response_model=StudentBase)
+@router.patch("/students/{student_id}", response_model=StudentBase)
 def update_student(
 	student_id: int,
 	student: StudentUpdate,
@@ -95,7 +94,7 @@ def update_student(
 
 
 # delete a student
-@app.delete("/students/{student_id}")
+@router.delete("/students/{student_id}")
 def delete_student(student_id: int, session: Session = get_session_dependency):
 	student = session.get(Student, student_id)
 	if not student:
