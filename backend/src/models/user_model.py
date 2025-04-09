@@ -1,6 +1,6 @@
 #from chat_service.src.models.chat import Chat
 #from chat_service.src.models.group import Group, GroupMember
-from sqlmodel import Field, Relationship, SQLModel
+from sqlmodel import Field, SQLModel
 
 
 # Base user model to inherit from
