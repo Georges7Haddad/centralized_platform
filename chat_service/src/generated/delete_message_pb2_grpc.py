@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import chat_service_pb2 as chat__service__pb2
+import delete_message_pb2 as delete__message__pb2
 
 GRPC_GENERATED_VERSION = '1.70.0'
 GRPC_VERSION = grpc.__version__
@@ -18,14 +18,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in chat_service_pb2_grpc.py depends on'
+        + f' but the generated code in delete_message_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class ChatServiceStub(object):
+class MessagingServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -34,43 +34,43 @@ class ChatServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.HealthCheck = channel.unary_unary(
-                '/ChatService/HealthCheck',
-                request_serializer=chat__service__pb2.HealthCheckRequest.SerializeToString,
-                response_deserializer=chat__service__pb2.HealthCheckReply.FromString,
+        self.DeleteMessage = channel.unary_unary(
+                '/messaging.MessagingService/DeleteMessage',
+                request_serializer=delete__message__pb2.DeleteMessageRequest.SerializeToString,
+                response_deserializer=delete__message__pb2.DeleteMessageResponse.FromString,
                 _registered_method=True)
 
 
-class ChatServiceServicer(object):
+class MessagingServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def HealthCheck(self, request, context):
+    def DeleteMessage(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_ChatServiceServicer_to_server(servicer, server):
+def add_MessagingServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'HealthCheck': grpc.unary_unary_rpc_method_handler(
-                    servicer.HealthCheck,
-                    request_deserializer=chat__service__pb2.HealthCheckRequest.FromString,
-                    response_serializer=chat__service__pb2.HealthCheckReply.SerializeToString,
+            'DeleteMessage': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteMessage,
+                    request_deserializer=delete__message__pb2.DeleteMessageRequest.FromString,
+                    response_serializer=delete__message__pb2.DeleteMessageResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'ChatService', rpc_method_handlers)
+            'messaging.MessagingService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('ChatService', rpc_method_handlers)
+    server.add_registered_method_handlers('messaging.MessagingService', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class ChatService(object):
+class MessagingService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def HealthCheck(request,
+    def DeleteMessage(request,
             target,
             options=(),
             channel_credentials=None,
@@ -83,9 +83,9 @@ class ChatService(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/ChatService/HealthCheck',
-            chat__service__pb2.HealthCheckRequest.SerializeToString,
-            chat__service__pb2.HealthCheckReply.FromString,
+            '/messaging.MessagingService/DeleteMessage',
+            delete__message__pb2.DeleteMessageRequest.SerializeToString,
+            delete__message__pb2.DeleteMessageResponse.FromString,
             options,
             channel_credentials,
             insecure,
