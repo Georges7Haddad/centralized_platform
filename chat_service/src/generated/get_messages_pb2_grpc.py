@@ -2,7 +2,6 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import get_messages_pb2 as get__messages__pb2
 
 GRPC_GENERATED_VERSION = '1.70.0'
 GRPC_VERSION = grpc.__version__
@@ -22,75 +21,3 @@ if _version_not_supported:
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
-
-
-class GetMessageStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.getmessage = channel.unary_unary(
-                '/messaging.GetMessage/getmessage',
-                request_serializer=get__messages__pb2.GetMessagesRequest.SerializeToString,
-                response_deserializer=get__messages__pb2.GetMessagesResponse.FromString,
-                _registered_method=True)
-
-
-class GetMessageServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def getmessage(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_GetMessageServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'getmessage': grpc.unary_unary_rpc_method_handler(
-                    servicer.getmessage,
-                    request_deserializer=get__messages__pb2.GetMessagesRequest.FromString,
-                    response_serializer=get__messages__pb2.GetMessagesResponse.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'messaging.GetMessage', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('messaging.GetMessage', rpc_method_handlers)
-
-
- # This class is part of an EXPERIMENTAL API.
-class GetMessage(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def getmessage(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/messaging.GetMessage/getmessage',
-            get__messages__pb2.GetMessagesRequest.SerializeToString,
-            get__messages__pb2.GetMessagesResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)

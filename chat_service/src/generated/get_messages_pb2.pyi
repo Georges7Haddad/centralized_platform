@@ -16,16 +16,16 @@ MESSAGE_IMAGE: MessageType
 MESSAGE_VIDEO: MessageType
 
 class GetMessagesRequest(_message.Message):
-    __slots__ = ("user_1", "user_2", "pagesize", "page_number")
+    __slots__ = ("user_1", "user_2", "page_size", "page_number")
     USER_1_FIELD_NUMBER: _ClassVar[int]
     USER_2_FIELD_NUMBER: _ClassVar[int]
-    PAGESIZE_FIELD_NUMBER: _ClassVar[int]
+    PAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
     PAGE_NUMBER_FIELD_NUMBER: _ClassVar[int]
     user_1: str
     user_2: str
-    pagesize: int
+    page_size: int
     page_number: int
-    def __init__(self, user_1: _Optional[str] = ..., user_2: _Optional[str] = ..., pagesize: _Optional[int] = ..., page_number: _Optional[int] = ...) -> None: ...
+    def __init__(self, user_1: _Optional[str] = ..., user_2: _Optional[str] = ..., page_size: _Optional[int] = ..., page_number: _Optional[int] = ...) -> None: ...
 
 class Message(_message.Message):
     __slots__ = ("message_id", "timestamp", "sender", "receiver", "content", "type", "read", "deleted")
