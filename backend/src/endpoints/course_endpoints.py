@@ -1,26 +1,18 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
 
-# from src.database.database import get_session
-from src.endpoints.local_connection import get_session
-from src.endpoints.local_session import app
+from src.database.database import get_session
 from src.models.course_model import (
-    Course,
-    CourseBase,
-    CourseCreate,
-    CourseUpdate,
+	Course,
+	CourseBase,
+	CourseCreate,
+	CourseUpdate,
 )
 from src.models.instructor_model import Instructor, InstructorCourseLink
 from src.models.student_model import Student, StudentCourseLink
-
-# from src.server import app
-
+from src.server import app
 
 router = APIRouter()
-
-@router.get("/stuff")
-def get_stuff():
-    return {"ok": True}
 
 get_session_dependency = Depends(get_session)
 

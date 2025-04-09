@@ -1,4 +1,4 @@
-from fastapi import HTTPException
+from fastapi import APIRouter, HTTPException
 from sqlmodel import Session
 
 from src.database.database import get_session_dependency
@@ -9,6 +9,8 @@ from src.models.club_model import (
 	ClubUpdate,
 )
 from src.server import app
+
+router = APIRouter()
 
 
 # create a club
@@ -31,10 +33,12 @@ def read_club(club_id: int, session: Session = get_session_dependency):
 			raise HTTPException(status_code=404, detail="Club not found")
 		return club
 
+
 # update a club
 @app.patch("/clubs/{club_id}", response_model=ClubBase)
-def update_club(club_id: int, club: ClubUpdate,
-				session: Session = get_session_dependency):
+def update_club(
+	club_id: int, club: ClubUpdate, session: Session = get_session_dependency
+):
 	with session:
 		club_db = session.get(Club, club_id)
 		if not club_db:

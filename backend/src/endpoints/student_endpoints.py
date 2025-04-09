@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
 
 from src.database.database import get_session
@@ -11,6 +11,8 @@ from src.models.student_model import (
 	StudentUpdate,
 )
 from src.server import app
+
+router = APIRouter()
 
 get_session_dependency = Depends(get_session)
 
