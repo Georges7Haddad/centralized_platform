@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session
 
-from src.database.database import get_session_dependency
+from src.database.database import get_session
 from src.models.club_model import (
 	Club,
 	ClubBase,
@@ -12,6 +12,7 @@ from src.server import app
 
 router = APIRouter()
 
+get_session_dependency = Depends(get_session)
 
 # create a club
 @app.post("/clubs/", response_model=ClubBase)
