@@ -16,10 +16,15 @@ jobs:
 
     # Enviromental variables (matching the ones in database.py)
     env:
+
       DATABASE_HOST: localhost
       DATABASE_USERNAME: user
       DATABASE_PASSWORD: password
       DATABASE_NAME: testdb
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
 
     # MYSQL Sevice
     services:
