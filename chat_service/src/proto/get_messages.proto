@@ -16,7 +16,7 @@ service GetMessage{
 message GetMessagesRequest{
     string user_1 = 1;
     string user_2 =2; //might be a user or group_id
-    int64 pagesize = 3;
+    int64 page_size = 3;
     int64 page_number = 4;
 }
 
