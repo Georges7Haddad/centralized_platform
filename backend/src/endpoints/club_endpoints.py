@@ -1,18 +1,20 @@
-from fastapi import HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session
 
-from src.database.database import get_session_dependency
+from src.database.database import get_session
 from src.models.club_model import (
 	Club,
 	ClubBase,
 	ClubCreate,
 	ClubUpdate,
 )
-from src.server import app
 
+router = APIRouter()
+
+get_session_dependency = Depends(get_session)
 
 # create a club
-@app.post("/clubs/", response_model=ClubBase)
+@router.post("/clubs/", response_model=ClubBase)
 def create_club(club: ClubCreate, session: Session = get_session_dependency):
 	with session:
 		db_club = Club.model_validate(club)
@@ -23,7 +25,7 @@ def create_club(club: ClubCreate, session: Session = get_session_dependency):
 
 
 # read one club info
-@app.get("/clubs/{club_id}", response_model=ClubBase)
+@router.get("/clubs/{club_id}", response_model=ClubBase)
 def read_club(club_id: int, session: Session = get_session_dependency):
 	with session:
 		club = session.get(Club, club_id)
@@ -31,10 +33,12 @@ def read_club(club_id: int, session: Session = get_session_dependency):
 			raise HTTPException(status_code=404, detail="Club not found")
 		return club
 
+
 # update a club
-@app.patch("/clubs/{club_id}", response_model=ClubBase)
-def update_club(club_id: int, club: ClubUpdate,
-				session: Session = get_session_dependency):
+@router.patch("/clubs/{club_id}", response_model=ClubBase)
+def update_club(
+	club_id: int, club: ClubUpdate, session: Session = get_session_dependency
+):
 	with session:
 		club_db = session.get(Club, club_id)
 		if not club_db:
@@ -48,7 +52,7 @@ def update_club(club_id: int, club: ClubUpdate,
 
 
 # delete a club
-@app.delete("/clubs/{club_id}")
+@router.delete("/clubs/{club_id}")
 def delete_club(club_id: int, session: Session = get_session_dependency):
 	with session:
 		club = session.get(Club, club_id)

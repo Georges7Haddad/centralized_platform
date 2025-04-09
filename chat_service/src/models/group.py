@@ -1,7 +1,7 @@
 from typing import Optional, List
 from datetime import datetime
 from sqlmodel import Field, SQLModel, Relationship
-from backend.src.models.user_model import UserBase
+#from backend.src.models.user_model import UserBase
 
 class Group(SQLModel, table=True):
     id: int = Field(primary_key=True)
@@ -11,10 +11,10 @@ class Group(SQLModel, table=True):
     creator_id: int = Field(foreign_key="user.id")
 
     # Relationships
-    created_by: Optional["UserBase"] = Relationship(
-        back_populates="created_groups",
-        sa_relationship_kwargs={"foreign_keys": "[Group.created_id]"}
-    )
+    #created_by: Optional["UserBase"] = Relationship(
+    #    back_populates="created_groups",
+    #    sa_relationship_kwargs={"foreign_keys": "[Group.created_id]"}
+    #)
     members: List["GroupMember"] = Relationship(back_populates="group")
 
 
@@ -26,4 +26,4 @@ class GroupMember(SQLModel, table=True):
 
     # Relationships
     group: Optional[Group] = Relationship(back_populates="members")
-    user: Optional["UserBase"] = Relationship(back_populates="group_memberships")
+    #user: Optional["UserBase"] = Relationship(back_populates="group_memberships")
