@@ -8,10 +8,6 @@ enum MessageType{
     MESSAGE_VIDEO = 2;
 }
 
-service GetMessage{
-    rpc getmessage (GetMessagesRequest) returns(GetMessagesResponse);
-}
-
 
 message GetMessagesRequest{
     string user_1 = 1;
