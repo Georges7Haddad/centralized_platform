@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fget_chats.proto\x12\tmessaging\"A\n\x04\x43hat\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\t\x12\x17\n\x0flast_message_id\x18\x03 \x01(\t\"@\n\x0eGetChatRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\r\n\x05limit\x18\x02 \x01(\x03\x12\x0e\n\x06offset\x18\x03 \x01(\x03\"F\n\x0fGetChatResponse\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x1e\n\x05\x63hats\x18\x02 \x03(\x0b\x32\x0f.messaging.Chatb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fget_chats.proto\x12\tmessaging\">\n\x04\x43hat\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\t\x12\x14\n\x0clast_message\x18\x03 \x01(\t\"@\n\x0eGetChatRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\r\n\x05limit\x18\x02 \x01(\x03\x12\x0e\n\x06offset\x18\x03 \x01(\x03\"F\n\x0fGetChatResponse\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x1e\n\x05\x63hats\x18\x02 \x03(\x0b\x32\x0f.messaging.Chatb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,9 +32,9 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'get_chats_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_CHAT']._serialized_start=30
-  _globals['_CHAT']._serialized_end=95
-  _globals['_GETCHATREQUEST']._serialized_start=97
-  _globals['_GETCHATREQUEST']._serialized_end=161
-  _globals['_GETCHATRESPONSE']._serialized_start=163
-  _globals['_GETCHATRESPONSE']._serialized_end=233
+  _globals['_CHAT']._serialized_end=92
+  _globals['_GETCHATREQUEST']._serialized_start=94
+  _globals['_GETCHATREQUEST']._serialized_end=158
+  _globals['_GETCHATRESPONSE']._serialized_start=160
+  _globals['_GETCHATRESPONSE']._serialized_end=230
 # @@protoc_insertion_point(module_scope)

@@ -6,14 +6,14 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Chat(_message.Message):
-    __slots__ = ("user_id", "chat_id", "last_message_id")
+    __slots__ = ("user_id", "chat_id", "last_message")
     USER_ID_FIELD_NUMBER: _ClassVar[int]
     CHAT_ID_FIELD_NUMBER: _ClassVar[int]
-    LAST_MESSAGE_ID_FIELD_NUMBER: _ClassVar[int]
+    LAST_MESSAGE_FIELD_NUMBER: _ClassVar[int]
     user_id: str
     chat_id: str
-    last_message_id: str
-    def __init__(self, user_id: _Optional[str] = ..., chat_id: _Optional[str] = ..., last_message_id: _Optional[str] = ...) -> None: ...
+    last_message: str
+    def __init__(self, user_id: _Optional[str] = ..., chat_id: _Optional[str] = ..., last_message: _Optional[str] = ...) -> None: ...
 
 class GetChatRequest(_message.Message):
     __slots__ = ("user_id", "limit", "offset")
