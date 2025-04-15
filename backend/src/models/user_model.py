@@ -1,6 +1,6 @@
-from sqlmodel import Field, SQLModel, Relationship
-from typing import List
+#from typing import List
 
+from sqlmodel import Field, Relationship, SQLModel
 
 
 # Base user model to inherit from
@@ -15,9 +15,9 @@ class UserBase(SQLModel):
 class User(UserBase, table=True):
     id: int = Field(default=None, primary_key=True)
     # Relationships
-    created_groups: List["Group"] = Relationship(back_populates="created_by")
-    group_memberships: List["GroupMember"] = Relationship(back_populates="user")
-    chats: List["Chat"] = Relationship(back_populates="user_chats")
+    created_groups: list["Group"] = Relationship(back_populates="created_by")
+    group_memberships: list["GroupMember"] = Relationship(back_populates="user")
+    chats: list["Chat"] = Relationship(back_populates="user_chats")
 
 # User create model (for data creation)
 class UserCreate(UserBase):

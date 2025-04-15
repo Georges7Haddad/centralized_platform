@@ -11,7 +11,7 @@ class Group(SQLModel, table=True):
     creator_id: int = Field(foreign_key="user.id")
 
     # Relationships
-    created_by: Optional["UserBase"] = Relationship(
+    created_by: Optional[UserBase] = Relationship(
         back_populates="created_groups",
         sa_relationship_kwargs={"foreign_keys": "[Group.created_id]"}
     )
@@ -26,4 +26,4 @@ class GroupMember(SQLModel, table=True):
 
     # Relationships
     group: Optional[Group] = Relationship(back_populates="members")
-    #user: Optional["UserBase"] = Relationship(back_populates="group_memberships")
+    user: Optional[UserBase] = Relationship(back_populates="group_memberships")
