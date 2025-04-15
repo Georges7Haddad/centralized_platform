@@ -1,6 +1,12 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from sqlmodel import Field, Relationship, SQLModel
+
+if TYPE_CHECKING:
+    from chat_service.src.models.chat import Chat
+    from chat_service.src.models.group import Group, GroupMember
 
 
 # Base user model to inherit from
