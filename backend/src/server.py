@@ -3,9 +3,14 @@ from typing import Union
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.endpoints import routers
 from src.graphql.user import user_schema
 
 app = FastAPI()
+
+
+for router in routers:
+	app.include_router(router)
 
 origins = [
 	"http://localhost:3000",  # React or frontend running locally
