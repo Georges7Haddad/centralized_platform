@@ -22,6 +22,10 @@ app = FastAPI(lifespan=lifespan)
 for router in routers:
     app.include_router(router)
 
+@app.on_event("startup")
+def startup_event():
+	create_db_and_tables()
+
 origins = [
 	"http://localhost:3000",  # React or frontend running locally
 ]
