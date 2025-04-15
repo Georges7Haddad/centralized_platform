@@ -1,16 +1,25 @@
+from __future__ import annotations
 from typing import Union
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.database.database import create_db_and_tables
 from src.endpoints import routers
 from src.graphql.user import user_schema
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup logic
+    create_db_and_tables()
+    yield
 
+app = FastAPI(lifespan=lifespan)
 
+# Include all routers
 for router in routers:
-	app.include_router(router)
+    app.include_router(router)
 
 origins = [
 	"http://localhost:3000",  # React or frontend running locally
