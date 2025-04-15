@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Union
+
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.database.database import create_db_and_tables
 from src.endpoints import routers
 from src.graphql.user import user_schema
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -42,7 +43,7 @@ def root_api():
 
 
 @app.get("/example/{example_id}")
-def get_example(example_id: int, q: Union[str, None] = None):
+def get_example(example_id: int, q: str | None = None):
 	return {"example_id": example_id}
 
 
