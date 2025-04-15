@@ -1,6 +1,6 @@
-# from chat_service.src.models.chat import Chat
-# from chat_service.src.models.group import Group, GroupMember
-from sqlmodel import Field, SQLModel
+from sqlmodel import Field, SQLModel, Relationship
+from typing import List
+
 
 
 # Base user model to inherit from
@@ -12,12 +12,12 @@ class UserBase(SQLModel):
 	major: str
 	email: str
 
-	# Relationships (strings to avoid circular import issues)
-	# created_groups: list["Group"] = Relationship(back_populates="created_by")
-	# group_memberships: list["GroupMember"] = 
-	# Relationship(back_populates="user")
-	# chats: list["Chat"] = Relationship(back_populates="user_chats")
-
+class User(UserBase, table=True):
+    id: int = Field(default=None, primary_key=True)
+    # Relationships
+    created_groups: List["Group"] = Relationship(back_populates="created_by")
+    group_memberships: List["GroupMember"] = Relationship(back_populates="user")
+    chats: List["Chat"] = Relationship(back_populates="user_chats")
 
 # User create model (for data creation)
 class UserCreate(UserBase):

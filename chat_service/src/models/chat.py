@@ -1,5 +1,6 @@
 from datetime import datetime
-from sqlmodel import SQLModel, Field
+from typing import Optional
+from sqlmodel import SQLModel, Field, Relationship
 #from backend.src.models.user_model import UserBase
 
 class Chat(SQLModel, table=True):
@@ -9,4 +10,4 @@ class Chat(SQLModel, table=True):
     last_updated: datetime = Field(default_factory=datetime.utcnow)
 
     # Relationships
-    #user_chats: Optional["UserBase"] = Relationship(back_populates="chats")
+    user_chats: Optional["UserBase"] = Relationship(back_populates="chats")

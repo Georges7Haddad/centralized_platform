@@ -7,7 +7,7 @@ class ClubBase(SQLModel):
     name: Annotated[str, Field(min_length=3, max_length=100)]
     abbreviated_name: Annotated[str, Field(min_length=2, max_length=10)]
     description: str
-    email: Annotated[str, Field(regex="^[\w\-.]+@([\w-]+\.)+[\w-]{2,4}$")]
+    email: Annotated[str, Field(regex=r"^[\w\-.]+@([\w-]+\.)+[\w-]{2,4}$")]
 
 
 class Club(ClubBase, table=True):
