@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package group;
+
+message LeaveGroupRequest {
+  string user_id = 1;
+  string group_id = 2;
+}
+
+message LeaveGroupResponse {
+  int32 status_code = 1;
+}
