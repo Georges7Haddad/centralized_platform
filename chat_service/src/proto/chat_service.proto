@@ -3,6 +3,7 @@ syntax = "proto3";
 service ChatService {
   rpc HealthCheck (HealthCheckRequest) returns (HealthCheckReply) {}
   rpc GetMessage (GetMessagesRequest) returns(GetMessagesResponse) {}
+  rpc GetChat (GetChatRequest) returns (GetChatResponse) {}
   rpc DeleteMessage(DeleteMessageRequest) returns (DeleteMessageResponse) {}
   rpc LeaveGroup (LeaveGroupRequest) returns (LeaveGroupResponse) {}
 }
