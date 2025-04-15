@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package messaging;
+
+message DeleteMessageRequest {
+  string message_id = 1;
+  string deletor_id = 2;
+}
+
+message DeleteMessageResponse {
+  int32 status_code = 1;
+}
