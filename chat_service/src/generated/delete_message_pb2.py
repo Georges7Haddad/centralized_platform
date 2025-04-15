@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14\x64\x65lete_message.proto\x12\tmessaging\">\n\x14\x44\x65leteMessageRequest\x12\x12\n\nmessage_id\x18\x01 \x01(\t\x12\x12\n\ndeletor_id\x18\x02 \x01(\t\",\n\x15\x44\x65leteMessageResponse\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x32\x66\n\x10MessagingService\x12R\n\rDeleteMessage\x12\x1f.messaging.DeleteMessageRequest\x1a .messaging.DeleteMessageResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14\x64\x65lete_message.proto\x12\tmessaging\">\n\x14\x44\x65leteMessageRequest\x12\x12\n\nmessage_id\x18\x01 \x01(\t\x12\x12\n\ndeletor_id\x18\x02 \x01(\t\",\n\x15\x44\x65leteMessageResponse\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,6 +35,4 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_DELETEMESSAGEREQUEST']._serialized_end=97
   _globals['_DELETEMESSAGERESPONSE']._serialized_start=99
   _globals['_DELETEMESSAGERESPONSE']._serialized_end=143
-  _globals['_MESSAGINGSERVICE']._serialized_start=145
-  _globals['_MESSAGINGSERVICE']._serialized_end=247
 # @@protoc_insertion_point(module_scope)

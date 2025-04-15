@@ -2,10 +2,6 @@ syntax = "proto3";
 
 package messaging;
 
-service MessagingService {
-  rpc DeleteMessage(DeleteMessageRequest) returns (DeleteMessageResponse);
-}
-
 message DeleteMessageRequest {
   string message_id = 1;
   string deletor_id = 2;

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 service ChatService {
   rpc HealthCheck (HealthCheckRequest) returns (HealthCheckReply) {}
+  rpc DeleteMessage(DeleteMessageRequest) returns (DeleteMessageResponse) {}
 }
 
 message HealthCheckRequest {
