@@ -36,7 +36,7 @@ jobs:
 
       # Run tests
       - name: Test with pytest
-        run: pytest
+        run: PYTHONPATH=.pytest
 
       # Start server
       - name: Start server
