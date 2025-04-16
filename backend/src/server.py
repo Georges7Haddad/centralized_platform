@@ -7,7 +7,6 @@ from src.database.database import create_db_and_tables
 from src.endpoints import routers
 from src.graphql.user import user_schema
 
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup logic
