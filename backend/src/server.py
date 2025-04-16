@@ -1,16 +1,24 @@
-from typing import Union
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.database.database import create_db_and_tables
+from src.endpoints import routers
 from src.graphql.user import user_schema
 
-app = FastAPI()
 
-@app.on_event("startup")
-def startup_event():
-	create_db_and_tables()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup logic
+    create_db_and_tables()
+    yield
+
+app = FastAPI(lifespan=lifespan)
+
+# Include all routers
+for router in routers:
+    app.include_router(router)
 
 origins = [
 	"http://localhost:3000",  # React or frontend running locally
@@ -33,7 +41,7 @@ def root_api():
 
 
 @app.get("/example/{example_id}")
-def get_example(example_id: int, q: Union[str, None] = None):
+def get_example(example_id: int, q: str | None = None):
 	return {"example_id": example_id}
 
 

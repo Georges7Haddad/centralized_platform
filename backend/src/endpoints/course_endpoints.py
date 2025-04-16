@@ -1,9 +1,7 @@
-from fastapi import Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
 
-# from src.database.database import get_session
-from src.endpoints.local_connection import get_session
-from src.endpoints.local_session import app
+from src.database.database import get_session
 from src.models.course_model import (
 	Course,
 	CourseBase,
@@ -13,13 +11,13 @@ from src.models.course_model import (
 from src.models.instructor_model import Instructor, InstructorCourseLink
 from src.models.student_model import Student, StudentCourseLink
 
-# from src.server import app
+router = APIRouter()
 
 get_session_dependency = Depends(get_session)
 
 
 # create a course
-@app.post("/courses/", response_model=CourseBase)
+@router.post("/courses/", response_model=CourseBase)
 def create_course(
 	course: CourseCreate, session: Session = get_session_dependency
 ):
@@ -31,7 +29,7 @@ def create_course(
 
 
 # read one course
-@app.get("/courses/{course_crn}", response_model=CourseBase)
+@router.get("/courses/{course_crn}", response_model=CourseBase)
 def read_course(course_crn: int, session: Session = get_session_dependency):
 	course = session.get(Course, course_crn)
 	if not course:
@@ -40,7 +38,7 @@ def read_course(course_crn: int, session: Session = get_session_dependency):
 
 
 # getting students for a course
-@app.get("/courses/{course_crn}/students")
+@router.get("/courses/{course_crn}/students")
 def read_course_students(
 	course_crn: int, session: Session = get_session_dependency
 ):
@@ -61,7 +59,7 @@ def read_course_students(
 
 
 # getting all instructors for a course
-@app.get("/courses/{course_crn}/instructors")
+@router.get("/courses/{course_crn}/instructors")
 def read_course_instructors(
 	course_crn: int, session: Session = get_session_dependency
 ):
@@ -82,7 +80,7 @@ def read_course_instructors(
 
 
 # update a course
-@app.patch("/courses/{course_crn}", response_model=CourseBase)
+@router.patch("/courses/{course_crn}", response_model=CourseBase)
 def update_course(
 	course_crn: int,
 	course: CourseUpdate,
@@ -101,7 +99,7 @@ def update_course(
 
 
 # delete a course
-@app.delete("/courses/{course_crn}")
+@router.delete("/courses/{course_crn}")
 def delete_course(course_crn: int, session: Session = get_session_dependency):
 	with session:
 		course = session.get(Course, course_crn)

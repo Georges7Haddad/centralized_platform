@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, select
 
 from src.database.database import get_session
@@ -10,13 +10,14 @@ from src.models.instructor_model import (
 	InstructorCreate,
 	InstructorUpdate,
 )
-from src.server import app
+
+router = APIRouter()
 
 get_session_dependency = Depends(get_session)
 
 
 # create an instructor
-@app.post("/instructors/", response_model=InstructorBase)
+@router.post("/instructors/", response_model=InstructorBase)
 def create_instructor(
 	instructor: InstructorCreate, session: Session = get_session_dependency
 ):
@@ -28,7 +29,7 @@ def create_instructor(
 
 
 # read one instructor
-@app.get("/instructors/{instructor_id}", response_model=InstructorBase)
+@router.get("/instructors/{instructor_id}", response_model=InstructorBase)
 def read_instructor(
 	instructor_id: int, session: Session = get_session_dependency
 ):
@@ -39,7 +40,7 @@ def read_instructor(
 
 
 # assign instructor to course
-@app.post("/instructors/{instructor_id}/register_course/{course_crn}")
+@router.post("/instructors/{instructor_id}/register_course/{course_crn}")
 def assign_instructor_to_course(
 	instructor_id: int,
 	course_crn: int,
@@ -59,7 +60,7 @@ def assign_instructor_to_course(
 	return {"message": "Instructor added to course"}
 
 
-@app.get("/instructors/{instructor_id}/courses")
+@router.get("/instructors/{instructor_id}/courses")
 def read_instructor_courses(
 	instructor_id: int, session: Session = get_session_dependency
 ):
@@ -82,7 +83,7 @@ def read_instructor_courses(
 
 
 # update instructor
-@app.patch("/instructors/{instructor_id}", response_model=InstructorBase)
+@router.patch("/instructors/{instructor_id}", response_model=InstructorBase)
 def update_instructor(
 	instructor_id: int,
 	instructor: InstructorUpdate,
@@ -100,7 +101,7 @@ def update_instructor(
 
 
 # delete an instructor
-@app.delete("/instructors/{instructor_id}")
+@router.delete("/instructors/{instructor_id}")
 def delete_instructor(
 	instructor_id: int, session: Session = get_session_dependency
 ):
