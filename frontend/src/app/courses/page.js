@@ -1,74 +1,38 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  Stack,
+  Box,
+  Typography,
+  TextField,
+  Paper,
+  CircularProgress,
+} from "@mui/material";
 import MuiAccordion from "@/components/accordion";
-import { Stack, Box, Typography, TextField, Paper } from "@mui/material";
-
-// Mock API Response
-const mockCourses = [
-  {
-    courseCode: "ACCT 210",
-    name: "Financial Accounting",
-    sections: [
-      {
-        crn: "20012",
-        associatedTerm: "Spring 2024-2025",
-        credits: "3.000",
-        time: "11:00 am - 12:15 pm",
-        days: "TR",
-        location: "Suliman S.Olayan Sch.of Busin. 236",
-        scheduleType: "Lecture",
-        instructor: ["Bassima Hout"],
-      },
-      {
-        crn: "20013",
-        associatedTerm: "Spring 2024-2025",
-        credits: "3.000",
-        time: "9:30 am - 10:45 am",
-        days: "MW",
-        location: "Suliman S.Olayan Sch.of Busin. 334",
-        scheduleType: "Lecture",
-        instructor: ["Bassima Hout"],
-      },
-    ],
-  },
-  {
-    courseCode: "ACCT 215",
-    name: "Management Accounting",
-    sections: [
-      {
-        crn: "20021",
-        associatedTerm: "Spring 2024-2025",
-        credits: "3.000",
-        time: "9:30 am - 10:45 am",
-        days: "MW",
-        location: "Suliman S.Olayan Sch.of Busin. 241",
-        scheduleType: "Lecture",
-        instructor: ["Mohamad Mazboudi", "Rania Uwaydah Mardini"],
-      },
-      {
-        crn: "20022",
-        associatedTerm: "Spring 2024-2025",
-        credits: "3.000",
-        time: "12:30 pm - 1:45 pm",
-        days: "TR",
-        location: "Suliman S.Olayan Sch.of Busin. 241",
-        scheduleType: "Lecture",
-        instructor: ["Rania Uwaydah Mardini"],
-      },
-    ],
-  },
-];
 
 export default function CoursesPage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  const filteredCourses = mockCourses.filter(
+  useEffect(() => {
+    fetch("/coursesData.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setCourses(data);
+        setLoading(false);
+      });
+  }, []);
+
+  const filteredCourses = courses.filter(
     (course) =>
       course.courseCode.toLowerCase().includes(searchTerm.toLowerCase()) ||
       course.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (loading) return <CircularProgress />;
 
   return (
     <div>
@@ -86,9 +50,9 @@ export default function CoursesPage() {
       />
 
       <Stack spacing={2}>
-        {filteredCourses.map((course) => (
+        {filteredCourses.map((course, index) => (
           <MuiAccordion
-            key={course.courseCode}
+            key={`${course.courseCode}-${index}`}
             Title={`${course.courseCode} - ${course.name}`}
             Content={course.sections.map((section) => (
               <Paper

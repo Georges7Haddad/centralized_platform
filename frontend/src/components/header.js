@@ -17,7 +17,10 @@ export default function AppHeader() {
         <Button color="inherit" onClick={() => router.push("/courses")}>
           All Courses
         </Button>
-        <Button color="inherit" onClick={() => router.push("/my-courses")}>
+        <Button
+          color="inherit"
+          onClick={() => router.push("/courses/my-courses")}
+        >
           My Courses
         </Button>
         <Button color="inherit" onClick={() => router.push("/clubs")}>
