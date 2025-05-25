@@ -10,15 +10,16 @@ from src.graphql.user import user_schema
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup logic
-    create_db_and_tables()
-    yield
+	# Startup logic
+	create_db_and_tables()
+	yield
+
 
 app = FastAPI(lifespan=lifespan)
 
 # Include all routers
 for router in routers:
-    app.include_router(router)
+	app.include_router(router)
 
 origins = [
 	"http://localhost:3000",  # React or frontend running locally

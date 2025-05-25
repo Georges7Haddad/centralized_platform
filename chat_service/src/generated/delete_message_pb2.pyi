@@ -10,7 +10,9 @@ class DeleteMessageRequest(_message.Message):
     DELETOR_ID_FIELD_NUMBER: _ClassVar[int]
     message_id: str
     deletor_id: str
-    def __init__(self, message_id: _Optional[str] = ..., deletor_id: _Optional[str] = ...) -> None: ...
+    def __init__(
+        self, message_id: _Optional[str] = ..., deletor_id: _Optional[str] = ...
+    ) -> None: ...
 
 class DeleteMessageResponse(_message.Message):
     __slots__ = ("status_code",)

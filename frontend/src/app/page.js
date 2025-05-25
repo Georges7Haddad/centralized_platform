@@ -123,9 +123,7 @@ export default function Page() {
               sx={{ height: "100%", display: "flex", flexDirection: "column" }}
             >
               <CardContent sx={{ flexGrow: 1 }}>
-                <SchoolIcon
-                  sx={{ fontSize: 40, color: "primary.main", mb: 2 }}
-                />
+                <SchoolIcon sx={{ fontSize: 40, color: "#6a132c", mb: 2 }} />
                 <Typography gutterBottom variant="h5" component="h2">
                   Academic Services
                 </Typography>
@@ -135,7 +133,11 @@ export default function Page() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
+                <Button
+                  sx={{ color: "#6a132c" }}
+                  size="small"
+                  endIcon={<ArrowForwardIcon />}
+                >
                   Learn More
                 </Button>
               </CardActions>
@@ -146,9 +148,7 @@ export default function Page() {
               sx={{ height: "100%", display: "flex", flexDirection: "column" }}
             >
               <CardContent sx={{ flexGrow: 1 }}>
-                <EventIcon
-                  sx={{ fontSize: 40, color: "primary.main", mb: 2 }}
-                />
+                <EventIcon sx={{ fontSize: 40, color: "#6a132c", mb: 2 }} />
                 <Typography gutterBottom variant="h5" component="h2">
                   Campus Life
                 </Typography>
@@ -157,29 +157,11 @@ export default function Page() {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
-                  Learn More
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid2>
-          <Grid2 xs={12} md={4}>
-            <Card
-              sx={{ height: "100%", display: "flex", flexDirection: "column" }}
-            >
-              <CardContent sx={{ flexGrow: 1 }}>
-                <SupportIcon
-                  sx={{ fontSize: 40, color: "primary.main", mb: 2 }}
-                />
-                <Typography gutterBottom variant="h5" component="h2">
-                  Support Services
-                </Typography>
-                <Typography>
-                  Access IT help, library resources, and student services.
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
+                <Button
+                  sx={{ color: "#6a132c" }}
+                  size="small"
+                  endIcon={<ArrowForwardIcon />}
+                >
                   Learn More
                 </Button>
               </CardActions>
@@ -210,7 +192,9 @@ export default function Page() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small">Read More</Button>
+                  <Button sx={{ color: "#6a132c" }} size="small">
+                    Read More
+                  </Button>
                 </CardActions>
               </Card>
             </Grid2>
@@ -229,7 +213,9 @@ export default function Page() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button size="small">Read More</Button>
+                  <Button sx={{ color: "#6a132c" }} size="small">
+                    Read More
+                  </Button>
                 </CardActions>
               </Card>
             </Grid2>

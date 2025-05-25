@@ -12,10 +12,10 @@ class MessageBase(SQLModel):
     read: bool
     deleted: bool
 
+
 class Message(MessageBase, table=True):
     pass
 
+
 class MessageCreate(MessageBase):
     pass
-
-

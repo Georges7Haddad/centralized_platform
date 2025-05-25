@@ -13,6 +13,7 @@ router = APIRouter()
 
 get_session_dependency = Depends(get_session)
 
+
 # create a club
 @router.post("/clubs/", response_model=ClubBase)
 def create_club(club: ClubCreate, session: Session = get_session_dependency):

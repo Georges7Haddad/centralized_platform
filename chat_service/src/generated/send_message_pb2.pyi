@@ -10,6 +10,7 @@ class MessageType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     MESSAGE_TEXT: _ClassVar[MessageType]
     MESSAGE_IMAGE: _ClassVar[MessageType]
     MESSAGE_VIDEO: _ClassVar[MessageType]
+
 MESSAGE_TEXT: MessageType
 MESSAGE_IMAGE: MessageType
 MESSAGE_VIDEO: MessageType
@@ -26,7 +27,14 @@ class SendMessageRequest(_message.Message):
     content: str
     type: MessageType
     message_id: str
-    def __init__(self, sender: _Optional[str] = ..., receiver: _Optional[str] = ..., content: _Optional[str] = ..., type: _Optional[_Union[MessageType, str]] = ..., message_id: _Optional[str] = ...) -> None: ...
+    def __init__(
+        self,
+        sender: _Optional[str] = ...,
+        receiver: _Optional[str] = ...,
+        content: _Optional[str] = ...,
+        type: _Optional[_Union[MessageType, str]] = ...,
+        message_id: _Optional[str] = ...,
+    ) -> None: ...
 
 class SendMessageResponse(_message.Message):
     __slots__ = ("status_code", "message_id")
@@ -34,4 +42,6 @@ class SendMessageResponse(_message.Message):
     MESSAGE_ID_FIELD_NUMBER: _ClassVar[int]
     status_code: int
     message_id: str
-    def __init__(self, status_code: _Optional[int] = ..., message_id: _Optional[str] = ...) -> None: ...
+    def __init__(
+        self, status_code: _Optional[int] = ..., message_id: _Optional[str] = ...
+    ) -> None: ...
