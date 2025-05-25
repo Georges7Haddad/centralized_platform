@@ -4,37 +4,34 @@
 # source: leave_group.proto
 # Protobuf Python Version: 5.29.0
 """Generated protocol buffer code."""
+
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
+
 _runtime_version.ValidateProtobufRuntimeVersion(
-    _runtime_version.Domain.PUBLIC,
-    5,
-    29,
-    0,
-    '',
-    'leave_group.proto'
+    _runtime_version.Domain.PUBLIC, 5, 29, 0, "", "leave_group.proto"
 )
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
 
 
-
-
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11leave_group.proto\x12\x05group\"6\n\x11LeaveGroupRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x10\n\x08group_id\x18\x02 \x01(\t\")\n\x12LeaveGroupResponse\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x32\x0e\n\x0cGroupServiceb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
+    b'\n\x11leave_group.proto\x12\x05group"6\n\x11LeaveGroupRequest\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x10\n\x08group_id\x18\x02 \x01(\t")\n\x12LeaveGroupResponse\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x32\x0e\n\x0cGroupServiceb\x06proto3'
+)
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
-_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'leave_group_pb2', _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, "leave_group_pb2", _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-  DESCRIPTOR._loaded_options = None
-  _globals['_LEAVEGROUPREQUEST']._serialized_start=28
-  _globals['_LEAVEGROUPREQUEST']._serialized_end=82
-  _globals['_LEAVEGROUPRESPONSE']._serialized_start=84
-  _globals['_LEAVEGROUPRESPONSE']._serialized_end=125
-  _globals['_GROUPSERVICE']._serialized_start=127
-  _globals['_GROUPSERVICE']._serialized_end=141
+    DESCRIPTOR._loaded_options = None
+    _globals["_LEAVEGROUPREQUEST"]._serialized_start = 28
+    _globals["_LEAVEGROUPREQUEST"]._serialized_end = 82
+    _globals["_LEAVEGROUPRESPONSE"]._serialized_start = 84
+    _globals["_LEAVEGROUPRESPONSE"]._serialized_end = 125
+    _globals["_GROUPSERVICE"]._serialized_start = 127
+    _globals["_GROUPSERVICE"]._serialized_end = 141
 # @@protoc_insertion_point(module_scope)

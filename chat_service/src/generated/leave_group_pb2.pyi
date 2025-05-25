@@ -10,7 +10,9 @@ class LeaveGroupRequest(_message.Message):
     GROUP_ID_FIELD_NUMBER: _ClassVar[int]
     user_id: str
     group_id: str
-    def __init__(self, user_id: _Optional[str] = ..., group_id: _Optional[str] = ...) -> None: ...
+    def __init__(
+        self, user_id: _Optional[str] = ..., group_id: _Optional[str] = ...
+    ) -> None: ...
 
 class LeaveGroupResponse(_message.Message):
     __slots__ = ("status_code",)

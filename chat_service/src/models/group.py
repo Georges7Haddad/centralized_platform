@@ -3,6 +3,7 @@ from datetime import datetime
 from sqlmodel import Field, SQLModel, Relationship
 from backend.src.models.user_model import UserBase
 
+
 class Group(SQLModel, table=True):
     id: int = Field(primary_key=True)
     name: str
@@ -13,7 +14,7 @@ class Group(SQLModel, table=True):
     # Relationships
     created_by: Optional["UserBase"] = Relationship(
         back_populates="created_groups",
-        sa_relationship_kwargs={"foreign_keys": "[Group.created_id]"}
+        sa_relationship_kwargs={"foreign_keys": "[Group.created_id]"},
     )
     members: List["GroupMember"] = Relationship(back_populates="group")
 
