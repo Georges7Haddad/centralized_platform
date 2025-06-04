@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   Container,
   Typography,
@@ -21,12 +22,16 @@ import {
 } from "@mui/icons-material";
 
 export default function Page() {
-  const [data, setData] = useState("");
   const serverUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const router = useRouter();
 
   useEffect(() => {
-    fetch(serverUrl).then((response) => setData(response.text()));
+    fetch(serverUrl);
   }, [serverUrl]);
+
+  const handleLogin = () => {
+    router.push('/login');
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -83,6 +88,7 @@ export default function Page() {
               <Button
                 variant="contained"
                 size="large"
+                onClick={handleLogin}
                 sx={{
                   bgcolor: "white",
                   color: "primary.main",
@@ -113,80 +119,313 @@ export default function Page() {
       </Paper>
 
       {/* Features Section */}
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Typography variant="h4" align="center" gutterBottom>
+      <Container maxWidth="lg" sx={{ py: 6 }}>
+        <Typography 
+          variant="h4" 
+          align="center" 
+          gutterBottom 
+          sx={{ 
+            fontWeight: 600,
+            color: 'primary.main',
+            mb: 1
+          }}
+        >
           Everything You Need in One Place
+        </Typography>
+        <Typography 
+          variant="subtitle1" 
+          align="center" 
+          sx={{ 
+            mb: 5,
+            color: 'text.secondary',
+            maxWidth: '700px',
+            mx: 'auto'
+          }}
+        >
+          Access all university services through our centralized platform
         </Typography>
         <Grid2 container spacing={4} sx={{ mt: 2 }}>
           <Grid2 xs={12} md={4}>
             <Card
-              sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+              sx={{ 
+                height: "100%", 
+                display: "flex", 
+                flexDirection: "column",
+                transition: 'box-shadow 0.3s',
+                '&:hover': {
+                  boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                },
+              }}
             >
-              <CardContent sx={{ flexGrow: 1 }}>
+              <CardContent sx={{ flexGrow: 1, p: 3, textAlign: 'center' }}>
                 <SchoolIcon
-                  sx={{ fontSize: 40, color: "primary.main", mb: 2 }}
+                  sx={{ fontSize: 50, color: "primary.main", mb: 2 }}
                 />
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant="h5" component="h2" sx={{ fontWeight: 600 }}>
                   Academic Services
                 </Typography>
-                <Typography>
+                <Typography sx={{ mb: 3 }}>
                   Access course registration, grades, transcripts, and academic
                   resources.
                 </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
+                <Button 
+                  variant="outlined" 
+                  color="primary" 
+                  endIcon={<ArrowForwardIcon />}
+                  sx={{ 
+                    borderWidth: 2,
+                    '&:hover': {
+                      borderWidth: 2,
+                    }
+                  }}
+                >
                   Learn More
                 </Button>
-              </CardActions>
+              </CardContent>
             </Card>
           </Grid2>
           <Grid2 xs={12} md={4}>
             <Card
-              sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+              sx={{ 
+                height: "100%", 
+                display: "flex", 
+                flexDirection: "column",
+                transition: 'box-shadow 0.3s',
+                '&:hover': {
+                  boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                },
+              }}
             >
-              <CardContent sx={{ flexGrow: 1 }}>
+              <CardContent sx={{ flexGrow: 1, p: 3, textAlign: 'center' }}>
                 <EventIcon
-                  sx={{ fontSize: 40, color: "primary.main", mb: 2 }}
+                  sx={{ fontSize: 50, color: "primary.main", mb: 2 }}
                 />
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant="h5" component="h2" sx={{ fontWeight: 600 }}>
                   Campus Life
                 </Typography>
-                <Typography>
+                <Typography sx={{ mb: 3 }}>
                   Stay updated with events, clubs, and campus activities.
                 </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
+                <Button 
+                  variant="outlined" 
+                  color="primary" 
+                  endIcon={<ArrowForwardIcon />}
+                  sx={{ 
+                    borderWidth: 2,
+                    '&:hover': {
+                      borderWidth: 2,
+                    }
+                  }}
+                >
                   Learn More
                 </Button>
-              </CardActions>
+              </CardContent>
             </Card>
           </Grid2>
           <Grid2 xs={12} md={4}>
             <Card
-              sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+              sx={{ 
+                height: "100%", 
+                display: "flex", 
+                flexDirection: "column",
+                transition: 'box-shadow 0.3s',
+                '&:hover': {
+                  boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                },
+              }}
             >
-              <CardContent sx={{ flexGrow: 1 }}>
+              <CardContent sx={{ flexGrow: 1, p: 3, textAlign: 'center' }}>
                 <SupportIcon
-                  sx={{ fontSize: 40, color: "primary.main", mb: 2 }}
+                  sx={{ fontSize: 50, color: "primary.main", mb: 2 }}
                 />
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography gutterBottom variant="h5" component="h2" sx={{ fontWeight: 600 }}>
                   Support Services
                 </Typography>
-                <Typography>
+                <Typography sx={{ mb: 3 }}>
                   Access IT help, library resources, and student services.
                 </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" endIcon={<ArrowForwardIcon />}>
+                <Button 
+                  variant="outlined" 
+                  color="primary" 
+                  endIcon={<ArrowForwardIcon />}
+                  sx={{ 
+                    borderWidth: 2,
+                    '&:hover': {
+                      borderWidth: 2,
+                    }
+                  }}
+                >
                   Learn More
                 </Button>
-              </CardActions>
+              </CardContent>
             </Card>
           </Grid2>
         </Grid2>
       </Container>
+
+      {/* Resources Section */}
+      <Box sx={{ bgcolor: "background.light", py: 6 }}>
+        <Container maxWidth="lg">
+          <Typography 
+            variant="h4" 
+            align="center" 
+            gutterBottom 
+            sx={{ 
+              mb: 1,
+              fontWeight: 600,
+              color: 'primary.main'
+            }}
+          >
+            Resources & Quick Links
+          </Typography>
+          <Typography 
+            variant="subtitle1" 
+            align="center" 
+            sx={{ 
+              mb: 5,
+              color: 'text.secondary',
+              maxWidth: '700px',
+              mx: 'auto'
+            }}
+          >
+            Access important university resources and information all in one place
+          </Typography>
+          
+          <Grid2 container spacing={3}>
+            <Grid2 xs={12} md={6} lg={3}>
+              <Card 
+                sx={{ 
+                  height: '100%',
+                  transition: 'box-shadow 0.3s',
+                  '&:hover': {
+                    boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                  },
+                }}
+              >
+                <CardContent sx={{ p: 3, textAlign: 'center' }}>
+                  <SchoolIcon sx={{ fontSize: 40, color: 'primary.main', mb: 2 }} />
+                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                    Course Catalog
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                    Browse available courses and academic programs
+                  </Typography>
+                  <Button 
+                    variant="outlined" 
+                    color="primary" 
+                    fullWidth
+                    sx={{ 
+                      mt: 'auto',
+                      borderWidth: 2,
+                      '&:hover': {
+                        borderWidth: 2,
+                      }
+                    }}
+                  >
+                    View Catalog
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid2>
+            
+            <Grid2 xs={12} md={6} lg={3}>
+              <Card 
+                sx={{ 
+                  height: '100%',
+                  transition: 'box-shadow 0.3s',
+                  '&:hover': {
+                    boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                  },
+                }}
+              >
+                <CardContent sx={{ p: 3, textAlign: 'center' }}>
+                  <EventIcon sx={{ fontSize: 40, color: 'primary.main', mb: 2 }} />
+                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                    Academic Calendar
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                    Important dates, deadlines and university events
+                  </Typography>
+                  <Button 
+                    variant="outlined" 
+                    color="primary" 
+                    fullWidth
+                    sx={{ 
+                      mt: 'auto',
+                      borderWidth: 2,
+                      '&:hover': {
+                        borderWidth: 2,
+                      }
+                    }}
+                  >
+                    View Calendar
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid2>
+            
+            <Grid2 xs={12} md={6} lg={3}>
+              <Card 
+                sx={{ 
+                  height: '100%',
+                  transition: 'box-shadow 0.3s',
+                  '&:hover': {
+                    boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                  },
+                }}
+              >
+                <CardContent sx={{ p: 3, textAlign: 'center' }}>
+                  <SupportIcon sx={{ fontSize: 40, color: 'primary.main', mb: 2 }} />
+                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                    Student Handbook
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                    Policies, procedures and student guidelines
+                  </Typography>
+                  <Button 
+                    variant="outlined" 
+                    color="primary" 
+                    fullWidth
+                    sx={{ 
+                      mt: 'auto',
+                      borderWidth: 2,
+                      '&:hover': {
+                        borderWidth: 2,
+                      }
+                    }}
+                  >
+                    View Handbook
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid2>
+            
+            <Grid2 xs={12} md={6} lg={3}>
+              <Card 
+                sx={{ 
+                  height: '100%',
+                  transition: 'box-shadow 0.3s',
+                  '&:hover': {
+                    boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                  },
+                }}
+              >
+                
+              </Card>
+            </Grid2>
+          </Grid2>
+          
+          <Box sx={{ textAlign: 'center', mt: 4 }}>
+            <Button 
+              variant="contained" 
+              color="primary"
+              sx={{ px: 4, py: 1 }}
+            >
+              View All Resources
+            </Button>
+          </Box>
+        </Container>
+      </Box>
 
       {/* News Section */}
       <Box sx={{ bgcolor: "background.paper", py: 4 }}>
