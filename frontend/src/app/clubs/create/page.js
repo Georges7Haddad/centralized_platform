@@ -3,16 +3,6 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardMedia, Typography, Box, TextField } from '@mui/material';
 
 export default function CreateClubPage() {
-    const [email, setEmail] = useState("");
-    const [emailError, setEmailError] = useState(false);
-
-    const handleEmailChange = (e) => {
-        const value = e.target.value;
-        setEmail(value);
-        // Simple email regex
-        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        setEmailError(!isValid && value.length > 0);
-    };
 
     return (
         <><Card sx={{ maxWidth: 1300, margin: 'auto', marginTop: 4 }}>
@@ -69,10 +59,6 @@ export default function CreateClubPage() {
                     required
                     id="outlined-required"
                     label="Club's Email"
-                    value={email}
-                    onChange={handleEmailChange}
-                    error={emailError}
-                    helperText={emailError ? 'Please enter a valid email address.' : ''}
                     fullWidth
                 />
             </div>
