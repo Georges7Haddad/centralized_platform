@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 
 export default function ClubInfo() {
-    const [clubInfo, setClubInfo] = useState(null);
+    /*const [clubInfo, setClubInfo] = useState(null);
     const { club } = useParams();
 
     useEffect(() => {
@@ -18,7 +18,8 @@ export default function ClubInfo() {
 
     if (!clubInfo) {
         return <div>Loading...</div>;
-    }
+    }*/
+
 
     return (
         <div>
