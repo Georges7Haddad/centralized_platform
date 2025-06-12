@@ -78,7 +78,7 @@ export default function ClubPage() {
                             {club.description}
                         </Typography>
                     </CardContent>
-                    <Button size="small" color="primary">Join Now</Button>
+                    <Button size="small" color="primary" href="/clubs/acm">Join Now</Button>
                 </Card>
             ))}
         </div>

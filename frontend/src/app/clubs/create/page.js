@@ -1,16 +1,12 @@
 'use client'
 import React, { useState } from 'react';
-import { Card, CardContent, CardMedia, Typography, Box, TextField } from '@mui/material';
+import { Card, CardContent, Button, Typography, Box, TextField } from '@mui/material';
 
 export default function CreateClubPage() {
 
     return (
         <><Card sx={{ maxWidth: 1300, margin: 'auto', marginTop: 4 }}>
-            <CardMedia
-                component="img"
-                alt="create club"
-                height="360"
-                image="/images/create-club.jpg" />
+            
             <CardContent>
                 <Typography gutterBottom variant="h1" component="div">
                     Create a Club
@@ -64,8 +60,12 @@ export default function CreateClubPage() {
             </div>
                     </Box>
             </CardContent>
-
-        </Card></>
+            
+        </Card>
+         <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+        <Button variant="contained" color="primary" size="large" sx={{ px: 6 }}>Submit</Button>
+      </Box></>
+         
 
     );
 }
