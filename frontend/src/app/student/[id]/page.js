@@ -3,14 +3,20 @@
 import {
   Container, Typography, Box, Card, CardContent,
   CardActions, Button, Grid, Divider, Chip,
-  Avatar, Paper, Tab, Tabs, useTheme
+  Avatar, Paper, Tab, Tabs, useTheme, Dialog,
+  DialogTitle, DialogContent, DialogActions, TextField,
+  FormControl, InputLabel, Select, MenuItem, Badge
 } from "@mui/material";
 import SchoolIcon from "@mui/icons-material/School";
 import GroupIcon from "@mui/icons-material/Group";
 import InfoIcon from "@mui/icons-material/Info";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import EventIcon from "@mui/icons-material/Event";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import AIAssistant from "../../../components/AIAssistant";
 
 // We'll keep using the same dummy data for now
 import {
@@ -19,14 +25,60 @@ import {
   joinedClubs,
   joinedSportTeams
 } from "../studentDummyData";
+import { calendarEvents } from "../calendarDummyData";
 
 export default function StudentDashboardPage() {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState(0);
   const theme = useTheme();
+  const router = useRouter();
+  const [events, setEvents] = useState(calendarEvents);
+  const [openEventDialog, setOpenEventDialog] = useState(false);
+  const [newEvent, setNewEvent] = useState({
+    title: "",
+    start: "",
+    end: "",
+    type: "study",
+    location: "",
+    description: "",
+    isAssigned: false
+  });
   
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
+  };
+  
+  const handleOpenEventDialog = () => {
+    setOpenEventDialog(true);
+  };
+  
+  const handleCloseEventDialog = () => {
+    setOpenEventDialog(false);
+  };
+  
+  const handleEventChange = (e) => {
+    const { name, value } = e.target;
+    setNewEvent(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  
+  const handleAddEvent = () => {
+    const eventToAdd = {
+      ...newEvent,
+      id: events.length + 1
+    };
+    setEvents([...events, eventToAdd]);
+    setNewEvent({
+      title: "",
+      start: "",
+      end: "",
+      type: "study",
+      location: "",
+      description: ""
+    });
+    handleCloseEventDialog();
   };
 
   return (
@@ -157,6 +209,7 @@ export default function StudentDashboardPage() {
             <Tab icon={<SchoolIcon />} label="Courses" />
             <Tab icon={<GroupIcon />} label="Clubs" />
             <Tab icon={<SportsSoccerIcon />} label="Sport Teams" />
+            <Tab icon={<CalendarMonthIcon />} label="Calendar" />
           </Tabs>
         </Paper>
 
@@ -209,8 +262,13 @@ export default function StudentDashboardPage() {
                 <Typography variant="h5" sx={{ color: theme.palette.primary.main, fontWeight: 600 }}>
                   Current Semester Courses
                 </Typography>
-                <Button variant="contained" size="medium" color="primary">
-                  Browse All Courses
+                <Button 
+                  variant="contained" 
+                  size="medium" 
+                  color="primary"
+                  onClick={() => router.push(`/student/${id}/transcript`)}
+                >
+                  View Academic Transcript
                 </Button>
               </Box>
               <Grid container spacing={4}>
@@ -247,7 +305,15 @@ export default function StudentDashboardPage() {
                         </Box>
                       </CardContent>
                       <CardActions sx={{ p: 2, pt: 0 }}>
-                        <Button size="medium" variant="outlined">View Details</Button>
+                        <Button 
+                          size="medium" 
+                          variant="outlined"
+                          onClick={() => course.course_title === "CMPS 202 - Data Structures" ? 
+                            router.push('/courses/CMPS202') : 
+                            alert('Course page not available yet')}
+                        >
+                          View Details
+                        </Button>
                         <Button size="medium" color="error" variant="outlined">Drop Course</Button>
                       </CardActions>
                     </Card>
@@ -348,8 +414,356 @@ export default function StudentDashboardPage() {
               </Grid>
             </Box>
           )}
+
+          {/* Calendar Tab */}
+          {activeTab === 4 && (
+            <Box sx={{ minHeight: '60vh' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+                <Typography variant="h5" sx={{ color: theme.palette.primary.main, fontWeight: 600 }}>
+                  My Calendar
+                </Typography>
+                <Button 
+                  variant="contained" 
+                  size="medium" 
+                  color="primary"
+                  startIcon={<EventIcon />}
+                  onClick={handleOpenEventDialog}
+                >
+                  Add New Event
+                </Button>
+              </Box>
+              
+              {/* Calendar View */}
+              <Card sx={{ mb: 4 }} elevation={3}>
+                <CardContent sx={{ p: 3 }}>
+                  <Typography variant="h6" sx={{ mb: 2, color: theme.palette.primary.main }}>
+                    June 2025
+                  </Typography>
+                  <Box sx={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: 'repeat(7, 1fr)',
+                    gap: 1,
+                    mb: 2
+                  }}>
+                    {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+                      <Box key={day} sx={{ 
+                        p: 1, 
+                        textAlign: 'center',
+                        fontWeight: 'bold',
+                        bgcolor: theme.palette.primary.main,
+                        color: 'white',
+                        borderRadius: 1
+                      }}>
+                        {day}
+                      </Box>
+                    ))}
+                    
+                    {/* Calendar grid - simplified for demo */}
+                    {Array.from({ length: 30 }, (_, i) => i + 1).map((day) => {
+                      const dayEvents = events.filter(event => {
+                        const eventDate = new Date(event.start);
+                        return eventDate.getDate() === day && eventDate.getMonth() === 5; // June is month 5 (0-indexed)
+                      });
+                      
+                      return (
+                        <Box key={day} sx={{ 
+                          p: 1, 
+                          border: '1px solid',
+                          borderColor: 'divider',
+                          borderRadius: 1,
+                          minHeight: '80px',
+                          position: 'relative',
+                          bgcolor: dayEvents.length > 0 ? 'rgba(25, 118, 210, 0.05)' : 'transparent'
+                        }}>
+                          <Typography sx={{ 
+                            position: 'absolute',
+                            top: 5,
+                            right: 5,
+                            fontWeight: 'medium',
+                            color: 'text.secondary'
+                          }}>
+                            {day}
+                          </Typography>
+                          
+                          <Box sx={{ mt: 3 }}>
+                            {dayEvents.slice(0, 2).map((event) => (
+                              <Box key={event.id} sx={{ mb: 0.5 }}>
+                                <Chip
+                                  label={event.title}
+                                  size="small"
+                                  icon={event.isAssigned ? <AssignmentIcon fontSize="small" /> : undefined}
+                                  color={
+                                    event.type === 'exam' ? 'error' :
+                                    event.type === 'deadline' ? 'warning' :
+                                    event.type === 'meeting' ? 'info' :
+                                    event.type === 'sports' ? 'success' :
+                                    'primary'
+                                  }
+                                  sx={{ 
+                                    width: '100%', 
+                                    height: 'auto', 
+                                    py: 0.5,
+                                    '& .MuiChip-label': {
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'space-between',
+                                      width: '100%'
+                                    }
+                                  }}
+                                />
+                              </Box>
+                            ))}
+                            {dayEvents.length > 2 && (
+                              <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                                +{dayEvents.length - 2} more
+                              </Typography>
+                            )}
+                          </Box>
+                        </Box>
+                      );
+                    })}
+                  </Box>
+                </CardContent>
+              </Card>
+              
+              {/* Upcoming Events List */}
+              <Typography variant="h6" sx={{ mb: 2, color: theme.palette.primary.main }}>
+                Upcoming Events
+              </Typography>
+              <Grid container spacing={3}>
+                {events
+                  .sort((a, b) => new Date(a.start) - new Date(b.start))
+                  .map((event) => (
+                    <Grid item xs={12} md={6} key={event.id}>
+                      <Card sx={{ mb: 2 }} elevation={2}>
+                        <CardContent sx={{ p: 3 }}>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                            <Box>
+                              <Typography variant="h6">
+                                {event.title}
+                                {event.isAssigned && (
+                                  <Chip 
+                                    label="Assigned" 
+                                    size="small" 
+                                    color="secondary"
+                                    icon={<AssignmentIcon fontSize="small" />}
+                                    sx={{ ml: 1, height: 20, fontSize: '0.7rem' }}
+                                  />
+                                )}
+                              </Typography>
+                              <Chip 
+                                label={event.type.toUpperCase()} 
+                                size="small" 
+                                color={
+                                  event.type === 'exam' ? 'error' :
+                                  event.type === 'deadline' ? 'warning' :
+                                  event.type === 'meeting' ? 'info' :
+                                  event.type === 'sports' ? 'success' :
+                                  'primary'
+                                }
+                                sx={{ mt: 1 }}
+                              />
+                            </Box>
+                            <Box sx={{ textAlign: 'right' }}>
+                              <Typography variant="body2" color="text.secondary">
+                                {new Date(event.start).toLocaleDateString('en-US', { 
+                                  weekday: 'short',
+                                  month: 'short', 
+                                  day: 'numeric'
+                                })}
+                              </Typography>
+                              <Typography variant="body2" fontWeight="medium">
+                                {new Date(event.start).toLocaleTimeString('en-US', { 
+                                  hour: '2-digit',
+                                  minute: '2-digit'
+                                })}
+                                {event.end && ` - ${new Date(event.end).toLocaleTimeString('en-US', { 
+                                  hour: '2-digit',
+                                  minute: '2-digit'
+                                })}`}
+                              </Typography>
+                            </Box>
+                          </Box>
+                          
+                          <Divider sx={{ my: 2 }} />
+                          
+                          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                            {event.location && (
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography variant="body2" color="text.secondary">Location:</Typography>
+                                <Typography variant="body2">{event.location}</Typography>
+                              </Box>
+                            )}
+                            {event.isAssigned && (
+                              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <Typography variant="body2" color="text.secondary">Assigned by:</Typography>
+                                <Typography variant="body2">{event.assignedBy}</Typography>
+                              </Box>
+                            )}
+                            {event.description && (
+                              <Typography variant="body2" sx={{ mt: 1 }}>
+                                {event.description}
+                              </Typography>
+                            )}
+                          </Box>
+                        </CardContent>
+                        <CardActions sx={{ p: 2, pt: 0 }}>
+                          {event.isAssigned ? (
+                            <Button 
+                              size="small" 
+                              variant="contained" 
+                              color="primary"
+                              onClick={() => router.push(`/courses/${event.courseId}`)}
+                              startIcon={<SchoolIcon />}
+                            >
+                              View Course Details
+                            </Button>
+                          ) : (
+                            <Button size="small" variant="outlined">Edit</Button>
+                          )}
+                          <Button size="small" color="error" variant="outlined">Delete</Button>
+                        </CardActions>
+                      </Card>
+                    </Grid>
+                  ))}
+              </Grid>
+              
+              {/* Add Event Dialog */}
+              <Dialog open={openEventDialog} onClose={handleCloseEventDialog} maxWidth="sm" fullWidth>
+                <DialogTitle>Add New Event</DialogTitle>
+                <DialogContent>
+                  <Box sx={{ mt: 2, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <TextField
+                      label="Event Title"
+                      name="title"
+                      value={newEvent.title}
+                      onChange={handleEventChange}
+                      fullWidth
+                      required
+                    />
+                    
+                    <FormControl fullWidth>
+                      <InputLabel>Event Type</InputLabel>
+                      <Select
+                        name="type"
+                        value={newEvent.type}
+                        onChange={handleEventChange}
+                        label="Event Type"
+                      >
+                        <MenuItem value="exam">Exam</MenuItem>
+                        <MenuItem value="deadline">Deadline</MenuItem>
+                        <MenuItem value="meeting">Meeting</MenuItem>
+                        <MenuItem value="sports">Sports</MenuItem>
+                        <MenuItem value="appointment">Appointment</MenuItem>
+                        <MenuItem value="study">Study</MenuItem>
+                      </Select>
+                    </FormControl>
+                    
+                    <FormControl fullWidth>
+                      <InputLabel>Is this an assigned event?</InputLabel>
+                      <Select
+                        name="isAssigned"
+                        value={newEvent.isAssigned}
+                        onChange={(e) => setNewEvent({...newEvent, isAssigned: e.target.value})}
+                        label="Is this an assigned event?"
+                      >
+                        <MenuItem value={true}>Yes - Assigned by instructor</MenuItem>
+                        <MenuItem value={false}>No - Personal event</MenuItem>
+                      </Select>
+                    </FormControl>
+                    
+                    {newEvent.isAssigned && (
+                      <>
+                        <TextField
+                          label="Assigned By"
+                          name="assignedBy"
+                          value={newEvent.assignedBy || ''}
+                          onChange={handleEventChange}
+                          fullWidth
+                        />
+                        
+                        <TextField
+                          label="Course ID"
+                          name="courseId"
+                          value={newEvent.courseId || ''}
+                          onChange={handleEventChange}
+                          fullWidth
+                        />
+                        
+                        <TextField
+                          label="Course Name"
+                          name="courseName"
+                          value={newEvent.courseName || ''}
+                          onChange={handleEventChange}
+                          fullWidth
+                        />
+                      </>
+                    )}
+                    
+                    <TextField
+                      label="Start Date & Time"
+                      name="start"
+                      type="datetime-local"
+                      value={newEvent.start}
+                      onChange={handleEventChange}
+                      InputLabelProps={{ shrink: true }}
+                      fullWidth
+                      required
+                    />
+                    
+                    <TextField
+                      label="End Date & Time"
+                      name="end"
+                      type="datetime-local"
+                      value={newEvent.end}
+                      onChange={handleEventChange}
+                      InputLabelProps={{ shrink: true }}
+                      fullWidth
+                    />
+                    
+                    <TextField
+                      label="Location"
+                      name="location"
+                      value={newEvent.location}
+                      onChange={handleEventChange}
+                      fullWidth
+                    />
+                    
+                    <TextField
+                      label="Description"
+                      name="description"
+                      value={newEvent.description}
+                      onChange={handleEventChange}
+                      multiline
+                      rows={3}
+                      fullWidth
+                    />
+                  </Box>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseEventDialog}>Cancel</Button>
+                  <Button 
+                    onClick={handleAddEvent} 
+                    variant="contained" 
+                    color="primary"
+                    disabled={!newEvent.title || !newEvent.start}
+                  >
+                    Add Event
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </Box>
+          )}
         </Box>
       </Container>
+      
+      {/* AI Assistant */}
+      <AIAssistant 
+        studentData={studentInfo} 
+        courseData={enrolledCourses} 
+        eventsData={events} 
+        theme={theme} 
+      />
     </Box>
   );
 }

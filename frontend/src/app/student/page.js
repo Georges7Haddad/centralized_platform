@@ -16,8 +16,8 @@ export default function StudentEntryPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Use the ID from dummy data if no ID is entered
-    const _idToUse = studentId || "202212345"; // Default to the ID in studentDummyData
-    router.push(`/student/202212345`);
+    const _idToUse = studentId || "000000000"; // Default to the ID in studentDummyData
+    router.push(`/student/000000000`);
   };
 
   return (
@@ -104,7 +104,7 @@ export default function StudentEntryPage() {
                 </Box>
                 <Box sx={{ mt: 4 }}>
                   <Typography variant="body2" color="text.secondary">
-                    Need help? Contact the Registrar&apos;s Office at registrar@aub.edu.lb
+                    Need help? Contact the Registrar&apos;s Office at regist@aub.edu.lb
                   </Typography>
                 </Box>
               </CardContent>
