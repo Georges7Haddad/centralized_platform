@@ -1,5 +1,5 @@
 export const studentInfo = {
-  id: "202212345",
+  id: "000000000",
   first_name: "Mariam",
   last_name: "Elwirish",
   email: "mariam.elwirish@mail.aub.edu",
@@ -10,7 +10,7 @@ export const studentInfo = {
 
 export const enrolledCourses = [
   {
-    course_title: "Data Structures",
+    course_title: "CMPS 202 - Data Structures",
     crn: 20123,
     associated_term: "Spring 2025",
     credits: "3",
@@ -21,10 +21,10 @@ export const enrolledCourses = [
     where: "Bliss Hall 205",
     schedule_type: "Lecture",
     term_code: "202520",
-    term_label: "Spring 2025"
+    term_label: "Spring 2025",
   },
   {
-    course_title: "Software Construction",
+    course_title: "CMPS 270 - Software Construction",
     crn: 20124,
     associated_term: "Spring 2025",
     credits: "3",
@@ -41,30 +41,24 @@ export const enrolledCourses = [
 
 export const joinedClubs = [
   {
-    name: "AI Club",
-    abbreviated_name: "AIC",
-    description: "Exploring AI and ML concepts.",
-    email: "aiclub@aub.edu.lb"
-  },
-  {
-    name: "Debate Society",
-    abbreviated_name: "DS",
-    description: "Weekly debates and competitions.",
-    email: "debate@aub.edu.lb"
+    name: "Association for Computing Machinery",
+    abbreviated_name: "ACM",
+    description: "AUB's chapter of the world's largest computing society. Focuses on advancing computing as a science and profession through workshops, hackathons, and tech talks.",
+    email: "acm@aub.edu.lb"
   }
 ];
 
 export const joinedSportTeams = [
   {
-    name: "Basketball Team",
-    abbreviated_name: "BT",
-    description: "AUB's competitive basketball team.",
-    email: "basketball@aub.edu.lb"
+    name: "Tennis Team",
+    abbreviated_name: "TT",
+    description: "AUB's tennis team.",
+    email: "tennis@aub.edu.lb"
   },
   {
-    name: "Swimming Team",
-    abbreviated_name: "ST",
-    description: "Competitive swimming and training.",
-    email: "swimming@aub.edu.lb"
+    name: "Chess Team",
+    abbreviated_name: "CT",
+    description: "AUB's chess team.",
+    email: "chess@aub.edu.lb"
   }
 ];

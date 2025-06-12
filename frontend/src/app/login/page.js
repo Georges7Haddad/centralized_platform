@@ -148,7 +148,7 @@ export default function LoginSelectionPage() {
         
         <Box sx={{ textAlign: 'center', mt: 4 }}>
           <Typography variant="body2" color="text.secondary">
-            Need help? Contact IT Support at support@aub.edu.lb
+            Need help? Contact IT Support at it.helpdesk@aub.edu.lb
           </Typography>
         </Box>
       </Container>
